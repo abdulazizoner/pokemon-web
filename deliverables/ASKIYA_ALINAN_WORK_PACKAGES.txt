@@ -1,0 +1,753 @@
+ASKIYA ALINAN WORK PACKAGE'LAR
+OPERASYONEL DEVİR VE YENİDEN BAŞLATMA RAPORU
+
+Belge sürümü  : 1.0
+Tarih         : 29.07.2026
+Proje         : Statik koleksiyon kartı vitrini + Shopier satış yönlendirmesi
+Hosting hedefi: Natro paylaşımlı hosting
+
+======================================================================
+1. RAPORUN AMACI
+======================================================================
+
+Bu rapor, şirket erişimi, gerçek hesap bilgileri, gerçek ürün verileri ve
+paydaş onayı olmadan güvenli biçimde tamamlanamayacak iş paketlerini tanımlar.
+Askıya alma bir iptal değildir. Her paket yalnız aşağıdaki "başlama kapıları"
+karşılandığında yeniden açılmalıdır.
+
+Askıdaki paketler:
+
+- WP-01 — Corporate and Shopier Account Readiness
+- WP-02 — Shopier Store and Operations Configuration
+- WP-03 — Final Brand and Business Content Approval
+- WP-09 — Natro Domain, Hosting and Deployment
+- WP-10 — Real Product Mapping, Final Acceptance and Handover
+
+Kesin kapsam sınırı:
+
+- Tanıtım sitesi statiktir.
+- Satış, ödeme, sipariş ve müşteri verileri Shopier'de yönetilir.
+- Natro'ya yalnız derlenmiş statik "dist/" içeriği yüklenir.
+- Backend, veritabanı, üyelik, yerel sepet veya ödeme sistemi eklenmez.
+- Gerçek parolalar, erişim anahtarları ve müşteri verileri Git'e yazılmaz.
+
+======================================================================
+2. WP-01 — CORPORATE AND SHOPIER ACCOUNT READINESS
+======================================================================
+
+Durum
+-----
+ASKIDA
+
+Askıya alınma nedeni
+--------------------
+Shopier hesabının hangi şirket ve yetkili adına açılacağı, şirket IBAN'ı,
+vergi/muhasebe düzeni ve hesap erişim sahipliği henüz şirket tarafından
+kesinleştirilmemiştir. Yanlış kişi adına açılan Shopier hesabı devredilemez.
+
+Gerekli şirket erişimi veya paydaş girdisi
+------------------------------------------
+- Resmî şirket ticari unvanı
+- Şirket türü: şahıs, limited veya anonim
+- Yetkili kişi kararı
+- Kurumsal e-posta ve şirket kontrollü telefon
+- Şirket adına kayıtlı banka hesabı/IBAN
+- Şirket merkez ve vergi bilgileri
+- Mali müşavir iletişimi ve teyidi
+- Gerekirse e-ticaret/tüketici hukuku danışmanı
+
+Gerekli belge, erişim veya kararlar
+----------------------------------
+- Shopier ticari hesap türü kararı
+- Panelin güncel olarak istediği doğrulama belgeleri
+- Yetkili kişinin hesap açılış onayı
+- Şirket IBAN hesap sahibi uyumu
+- Fatura/e-Arşiv yöntemine ilişkin mali müşavir kararı
+- ETBİS değerlendirmesine ilişkin uzman teyidi
+- Hesap kurtarma ve MFA sahipliği kararı
+
+Yeniden açıldığında yapılacak kesin görevler
+--------------------------------------------
+1. Ticari unvanı ve yetkiliyi resmî kayıttan doğrula.
+2. Kurumsal e-posta ve şirket kontrollü telefonu hazırla.
+3. Shopier'de ticari üyelik akışını başlat.
+4. Şirket türü, adres, vergi ve yetkili bilgilerini gir.
+5. Yalnız şirket adına kayıtlı IBAN'ı tanımla.
+6. Panelin istediği güncel belgeleri güvenli kanaldan yükle.
+7. Üyelik sözleşmelerini yetkiliye incelet ve onaylat.
+8. Hesap aktivasyonunu takip et.
+9. Shopier ve kurumsal e-postada MFA'yı etkinleştir.
+10. Hesap sahipliği ve kurtarma prosedürünü şirket içi kayda geçir.
+11. Güncel işlem ücretleri ve tahsilat kurallarını panelden kaydet.
+12. Mali müşavir/hukukçu teyitlerini karar kaydına ekle.
+
+Bağımlılıklar
+-------------
+- Şirket yönetimi kararı
+- Şirket IBAN'ı
+- Kurumsal iletişim kanalları
+- Mali müşavir erişimi
+- Shopier kayıt/aktivasyon süreci
+
+Riskler
+-------
+- Yanlış kişi adına hesap açılması ve devredilememesi
+- Kişisel IBAN kullanılması
+- Kurumsal erişimin tek bir çalışanda kalması
+- MFA kurtarma bilgisinin kaybı
+- Güncel olmayan belge veya ücret bilgisinin kullanılması
+- Vergi ve fatura sürecinin satıştan sonra ele alınması
+
+Kabul kriterleri
+----------------
+- Shopier hesabı doğru şirket ve yetkili adına aktiftir.
+- Şirket adına kayıtlı doğru IBAN tanımlıdır.
+- Shopier ve kurumsal e-posta MFA ile korunur.
+- Güncel işlem ücretleri panelden doğrulanmıştır.
+- Fatura/e-Belge yöntemi mali müşavir tarafından yazılı teyit edilmiştir.
+- ETBİS değerlendirmesi gerekli uzman tarafından kayda alınmıştır.
+
+Beklenen kanıt veya ekran görüntüleri
+-------------------------------------
+- Kişisel/vergi verileri maskelenmiş hesap aktivasyon ekranı
+- Maskelenmiş IBAN hesap sahibi doğrulaması
+- MFA'nın etkin olduğunu gösteren, kurtarma kodu içermeyen ekran
+- İşlem ücretleri ekranı
+- Tarihli şirket içi hesap sahipliği karar notu
+- Mali müşavir teyit kaydı
+
+Sorumlu taraf
+-------------
+Ana sorumlu: Şirket yetkilisi
+Uygulama desteği: Proje ekibi
+Uzman teyidi: Mali müşavir ve gerektiğinde hukukçu
+
+Önerilen ilk eylem
+------------------
+"Shopier hesabı sahibi ve şirket IBAN'ı" kararını tek sayfalık şirket içi
+onay notuyla kesinleştirmek.
+
+Git'e asla eklenmeyecekler
+--------------------------
+- Shopier parolası
+- MFA QR kodu ve kurtarma kodları
+- T.C. kimlik numarası veya kimlik görüntüsü
+- Vergi levhası ve imza belgelerinin ham kopyaları
+- Tam IBAN ve banka erişim bilgileri
+- Shopier erişim/entegrasyon anahtarları
+- Kişisel telefon ve gizli kurumsal iletişim bilgileri
+
+Şirket/mali müşavir/hukukçu ile doğrulanacaklar
+-----------------------------------------------
+- Doğru şirket ve yetkili
+- Fatura/e-Belge yöntemi
+- Ürün tedarik ve stok kayıt düzeni
+- ETBİS durumu
+- İkinci el/kolleksiyon ürünlerinin vergi ve belge niteliği
+
+======================================================================
+3. WP-02 — SHOPIER STORE AND OPERATIONS CONFIGURATION
+======================================================================
+
+Durum
+-----
+ASKIDA
+
+Askıya alınma nedeni
+--------------------
+Aktif Shopier şirket hesabı, gerçek ürün sahibi kararları, güncel kargo
+seçenekleri ve şirketin fatura/iade prosedürü olmadan mağaza operasyonu
+doğrulanamaz.
+
+Gerekli şirket erişimi veya paydaş girdisi
+------------------------------------------
+- Aktif Shopier hesabı
+- Shopier panel erişimi
+- Marka adı ve destek iletişim bilgileri
+- Ürün sahibi/kondisyon sorumlusu
+- Kargo ve paketleme sorumlusu
+- Mali müşavir ve iade karar sahibi
+
+Gerekli belge, erişim veya kararlar
+----------------------------------
+- Mağaza adı, sloganı ve hakkında metni
+- Logo ve masaüstü/mobil banner
+- Kategori planı
+- Kargo ücret politikası
+- Ücretsiz kargo eşiği varsa tutarı
+- Paketleme standardı onayı
+- Kondisyon standardı
+- İade/iptal prosedürü
+- Fatura operasyonu
+- Güncel Shopier ücret ve kargo ekranları
+
+Yeniden açıldığında yapılacak kesin görevler
+--------------------------------------------
+1. Dükkan seçeneklerini ve kurumsal iletişimi doldur.
+2. Logo ve banner'ları Shopier ölçülerine göre yükle.
+3. Kategorileri oluştur ve sıralamasını belirle.
+4. Kargo tipini ve ücret politikasını yapılandır.
+5. Panelde güncel anlaşmalı kargo firmaları/şartlarını doğrula.
+6. Ürün adlandırma ve açıklama şablonunu onayla.
+7. Kondisyon dereceleri ile inceleme formunu kesinleştir.
+8. Bir test ürünü gerçek olmayan fakat güvenli test içeriğiyle oluştur.
+9. Test ürününü üyeliksiz tarayıcıdan kontrol et.
+10. Kontrollü sipariş, kargo kodu ve sipariş kapanışını dene.
+11. İade akışını prosedür düzeyinde doğrula.
+12. Operasyon sorumlularına günlük kontrol listesini uygulat.
+
+Bağımlılıklar
+-------------
+- WP-01 tamamlanmış olmalı
+- WP-03 marka kararları en az geçici onay almalı
+- Mali müşavir fatura yöntemi belli olmalı
+- Ürün sahibinin kondisyon standardı belli olmalı
+
+Riskler
+-------
+- Yanlış kargo tipi nedeniyle anlaşmalı kargo kullanılamaması
+- Güncel olmayan kargo ücreti/firması
+- Fotoğraf ile fiziksel ürünün uyuşmaması
+- Kondisyon kusurlarının eksik açıklanması
+- İade için bakiye ve muhasebe sürecinin hazırlanmaması
+- Kanıtlanamayan resmîlik/orijinallik iddiaları
+
+Kabul kriterleri
+----------------
+- Dükkan bilgileri şirketçe onaylıdır.
+- Kategoriler ve kargo ayarları doğru çalışır.
+- Test ürünü dışarıdan açılır ve doğru bilgiler gösterir.
+- Test sipariş/kargo kapanış akışı başarıyla uygulanmıştır.
+- Fatura, paketleme ve iade prosedürü yazılıdır.
+- Günlük operasyon kontrol listesi sorumlu kişi tarafından uygulanabilir.
+
+Beklenen kanıt veya ekran görüntüleri
+-------------------------------------
+- Dükkan ana sayfası
+- Logo/banner görünümü (masaüstü ve mobil)
+- Kategori ayarları
+- Kargo ayarları ve güncel ücret ekranı
+- Test ürün sayfası
+- Kişisel veriler maskelenmiş test siparişi/kargo kapanış ekranı
+
+Sorumlu taraf
+-------------
+Ana sorumlu: Şirket operasyon yetkilisi
+Ürün doğruluğu: Ürün sahibi/kondisyon sorumlusu
+Teknik destek: Proje ekibi
+Mali süreç: Mali müşavir
+
+Önerilen ilk eylem
+------------------
+Aktif Shopier panelinde güncel işlem ve kargo ücretlerini kaydedip, tek bir
+kontrollü test ürünü oluşturmak.
+
+Git'e asla eklenmeyecekler
+--------------------------
+- Shopier oturum bilgileri
+- Gerçek müşteri/sipariş/adres verileri
+- Tam banka ve tahsilat bilgileri
+- Fatura üzerinde kişisel/vergi verisi
+- Shopier panelinden gizli erişim anahtarları
+
+Şirket/mali müşavir/hukukçu ile doğrulanacaklar
+-----------------------------------------------
+- Kargo ve ücretsiz kargo ticari kararı
+- Fatura ve iade muhasebe akışı
+- Mesafeli satış ve cayma metinleri
+- Ürün açıklamasındaki hukukî ifadeler
+
+======================================================================
+4. WP-03 — FINAL BRAND AND BUSINESS CONTENT APPROVAL
+======================================================================
+
+Durum
+-----
+ASKIDA
+
+Askıya alınma nedeni
+--------------------
+Marka adı, logo, alan adı, şirket iletişim bilgileri, gerçek hakkımızda metni
+ve ürün sahibinin içerik onayı henüz alınmamıştır. Mevcut "Paralel Arşiv"
+markası ve ürünler açıkça temsili ön izleme içeriğidir.
+
+Gerekli şirket erişimi veya paydaş girdisi
+------------------------------------------
+- Şirket karar vericisi
+- Marka/iletişim sorumlusu
+- Ürün sahibi
+- Gerekirse marka ve fikrî mülkiyet hukukçusu
+
+Gerekli belge, erişim veya kararlar
+----------------------------------
+- Nihai mağaza adı
+- Onaylı logo ve görsel kimlik
+- Nihai alan adı
+- Kurumsal e-posta/telefon/sosyal hesaplar
+- Hakkımızda metni
+- Kargo/iade bilgilendirme metni
+- Bağlantısızlık açıklaması
+- İlk gerçek ürün listesi
+- Gerçek ürün fotoğrafları ve kondisyon onayları
+
+Yeniden açıldığında yapılacak kesin görevler
+--------------------------------------------
+1. Marka adını ve alan adını onayla.
+2. Logo, favicon ve OG görselini nihai markaya göre üret/onayla.
+3. Merkezî mağaza yapılandırmasındaki tüm geçici alanları değiştir.
+4. Kurumsal iletişim ve sosyal bağlantıları doğrula.
+5. Hakkımızda, SSS, iletişim, kargo ve iade metinlerini onaylat.
+6. Bağlantısızlık ve marka/IP açıklamasını hukukçuya gerektiğinde incelet.
+7. Temsili ürünleri gerçek ürünlerle değiştirme planı yap.
+8. Ön izleme bandının yalnız gerçek içerikler tamamlandığında kaldırılmasını onayla.
+9. Masaüstü/mobil görsel kabul ekranlarını şirkete sun.
+10. Yazılı marka ve içerik kabulü al.
+
+Bağımlılıklar
+-------------
+- Şirket karar vericisi erişimi
+- Gerçek marka/iletişim bilgileri
+- İlk gerçek ürün içerikleri
+- Gerekirse hukuk/IP incelemesi
+
+Riskler
+-------
+- Geçici markanın yanlışlıkla canlıya çıkması
+- Resmî Pokémon ilişkisi izlenimi
+- Yanlış iletişim bilgisinin yayınlanması
+- Temsili fiyat veya ürünlerin gerçek sanılması
+- Son dakika marka değişikliğinin Shopier eşleştirmesini bozması
+
+Kabul kriterleri
+----------------
+- Marka adı, logo, domain ve iletişim şirketçe yazılı onaylıdır.
+- Geçici marka/iletişim metinleri üretim paketinde kalmamıştır.
+- Tüm gerçek ürünler ürün sahibi tarafından onaylanmıştır.
+- Resmî ilişki izlenimi yaratan varlık bulunmamaktadır.
+- Mobil ve masaüstü ekranlar paydaş kabulünden geçmiştir.
+
+Beklenen kanıt veya ekran görüntüleri
+-------------------------------------
+- Şirket onay e-postası/karar notu
+- Ana sayfa masaüstü/mobil nihai ekranı
+- Katalog ve ürün detay ekranı
+- Nihai footer ve iletişim alanı
+- Sosyal paylaşım ön izleme ekranı
+
+Sorumlu taraf
+-------------
+Ana sorumlu: Şirket/ürün sahibi
+Uygulama: Proje ekibi
+Uzman teyidi: Gerekirse marka ve tüketici hukuku danışmanı
+
+Önerilen ilk eylem
+------------------
+Mağaza adı, domain ve iletişim bilgilerini tek bir "nihai marka bilgi formu"
+üzerinde onaylamak.
+
+Git'e asla eklenmeyecekler
+--------------------------
+- Yayınlanması istenmeyen kişisel iletişim bilgileri
+- Marka kaynak dosyalarına gömülü gizli metadata
+- Lisansı bulunmayan üçüncü taraf görseller
+- Hukuk/mali danışman yazışmalarındaki kişisel veriler
+
+Şirket/mali müşavir/hukukçu ile doğrulanacaklar
+-----------------------------------------------
+- Marka adı ve alan adının kullanımı
+- Pokémon ve diğer hak sahipleriyle bağlantısızlık dili
+- Hakkımızda/kargo/iade metinlerinin doğruluğu
+- Kamuya açık kurumsal iletişim bilgileri
+
+======================================================================
+5. WP-09 — NATRO DOMAIN, HOSTING AND DEPLOYMENT
+======================================================================
+
+Durum
+-----
+ASKIDA
+
+Askıya alınma nedeni
+--------------------
+Natro hesap erişimi, hosting paketi, alan adı ve DNS/SSL yetkisi şirkettedir.
+Gerçek hesaba erişmeden canlı değişiklik yapmak güvenli veya doğrulanabilir
+değildir.
+
+Gerekli şirket erişimi veya paydaş girdisi
+------------------------------------------
+- Natro müşteri paneli yetkisi
+- Kullanılacak hosting hesabı
+- Alan adı yönetim yetkisi
+- DNS ve SSL işlemi için yetkili kişi
+- Canlıya çıkış zamanı ve bakım penceresi
+
+Gerekli belge, erişim veya kararlar
+----------------------------------
+- Nihai alan adı
+- Natro Linux/Windows hosting türü
+- Web kök dizini
+- FTPS/SFTP veya güvenli dosya aktarım bilgileri
+- DNS/name server kararı
+- SSL sertifikası/otomatik yenileme durumu
+- Canonical domain: www veya kök domain
+- Varsa mevcut canlı sitenin yedeği ve rollback kararı
+
+Yeniden açıldığında yapılacak kesin görevler
+--------------------------------------------
+1. Natro hosting türü ve statik dosya desteğini doğrula.
+2. Mevcut web kökünü ve içerikleri envanterle.
+3. Önceki yayının tarihli yedeğini al.
+4. Alan adı ve DNS kayıtlarını doğrula.
+5. SSL'i etkinleştir; HTTP -> HTTPS yönlendirmesini ayarla.
+6. www/kök domain için tek canonical adres seç.
+7. Son doğrulanmış "dist/" içeriğini güvenli aktarım ile web köküne yükle.
+8. Platforma göre 404, cache ve güvenlik başlıklarını yapılandır.
+9. Kaynak kodu, .git, .env, test verisi ve source map yüklenmediğini kontrol et.
+10. Canlı smoke test ve kritik bağlantı testlerini çalıştır.
+11. Rollback paketini ve adımlarını doğrula.
+12. Deployment tarihini, sürüm/commit kimliğini ve sorumluyu kaydet.
+
+Bağımlılıklar
+-------------
+- WP-03 nihai marka/domain kararı
+- WP-10 gerçek içerik ve kabul
+- Son temiz production build
+- Şirket Natro erişimi
+
+Riskler
+-------
+- Yanlış web köküne yükleme
+- Mevcut siteyi yedeksiz üzerine yazma
+- DNS/SSL kesintisi
+- Kaynak kodu veya gizli dosyaların yayınlanması
+- Yanlış canonical URL ve sitemap
+- FTP parolasının Git veya mesajlarda paylaşılması
+
+Kabul kriterleri
+----------------
+- Site nihai domain üzerinde geçerli HTTPS ile açılır.
+- HTTP istekleri seçilen canonical HTTPS adrese yönlenir.
+- Tüm sayfalar ve 404 davranışı çalışır.
+- Sitemap/robots/canonical nihai domaini kullanır.
+- Shopier bağlantıları doğru ve güvenli açılır.
+- Kaynak/gizli dosyalar yayınlanmamıştır.
+- Önceki sürüme dönüş prosedürü doğrulanmıştır.
+
+Beklenen kanıt veya ekran görüntüleri
+-------------------------------------
+- Natro web alanı ve SSL durumu (gizli bilgiler maskeli)
+- HTTPS ana sayfa
+- Mobil/masaüstü canlı ekran
+- 404 ekranı
+- Canonical, sitemap ve robots kontrolü
+- Canlı sürüm/commit kayıt notu
+- Rollback yedeği dosya listesi
+
+Sorumlu taraf
+-------------
+Ana sorumlu: Şirket Natro hesap sahibi
+Teknik uygulama: Proje ekibi
+Onay: Şirket/ürün sahibi
+
+Önerilen ilk eylem
+------------------
+Natro panelinde hosting türü, kullanılacak domain ve web kök dizinini yalnız
+okuma amaçlı doğrulamak; hiçbir dosya silmeden mevcut sitenin yedeğini almak.
+
+Git'e asla eklenmeyecekler
+--------------------------
+- Natro kullanıcı adı/parolası
+- FTP/FTPS/SFTP parolası
+- Panel oturum veya API anahtarı
+- SSL özel anahtarı
+- .env veya erişim profili
+- Gerçek DNS sağlayıcı kurtarma bilgileri
+
+Şirket/mali müşavir/hukukçu ile doğrulanacaklar
+-----------------------------------------------
+- Canlı domain ve şirketin yayın onayı
+- Kamuya açık yasal/kurumsal bilgiler
+- Hosting paketinin şirket sahipliği ve yenileme sorumlusu
+
+======================================================================
+6. WP-10 — REAL PRODUCT MAPPING, FINAL ACCEPTANCE AND HANDOVER
+======================================================================
+
+Durum
+-----
+ASKIDA
+
+Askıya alınma nedeni
+--------------------
+Gerçek ürün listesi, ön/arka fotoğraflar, kondisyon notları, fiyatlar,
+stoklar ve Shopier ürün URL'leri mevcut değildir. Nihai şirket kabulü ve canlı
+Shopier/Natro testi bu girdiler olmadan yapılamaz.
+
+Gerekli şirket erişimi veya paydaş girdisi
+------------------------------------------
+- Ürün sahibi/kondisyon sorumlusu
+- Aktif Shopier paneli
+- Gerçek ürün fotoğrafları
+- Fiyat ve stok kararları
+- Şirket kabul yetkilisi
+- Natro canlı ortam erişimi
+
+Gerekli belge, erişim veya kararlar
+----------------------------------
+- Her ürün için benzersiz iç ID
+- Ön ve arka gerçek fotoğraf
+- Kart/set/koleksiyon no/dil/nadirlik/baskı
+- Standart kondisyon ve açık kondisyon notu
+- Satış fiyatı ve stok
+- Shopier ürün URL'si
+- Kargo tipi ve kategori
+- Nihai şirket/ürün sahibi içerik onayı
+
+Yeniden açıldığında yapılacak kesin görevler
+--------------------------------------------
+1. Gerçek ürün envanterini standart şablonda topla.
+2. Her ürünün ön/arka ve kusur detay fotoğraflarını doğrula.
+3. Kondisyonu ürün sahibine onaylat.
+4. Shopier'de ayrı ürün/varyasyon kararına göre ürünleri oluştur.
+5. Tam HTTPS Shopier URL'lerini kaydet.
+6. Statik sitede gerçek ürün içeriklerini ve optimize görselleri oluştur.
+7. Placeholder/temsilî işaretleri yalnız gerçek ürünlerde kaldır.
+8. Fiyat ve stokları Shopier ile karşılaştır.
+9. Her statik ürünün doğru Shopier sayfasını açtığını test et.
+10. Sold/draft/hidden ve satın alma CTA kurallarını doğrula.
+11. Son masaüstü/mobil, erişilebilirlik ve bağlantı regresyonunu çalıştır.
+12. Natro canlı dağıtımından sonra smoke test yap.
+13. Ürün ekleme, satışta güncelleme ve yeniden dağıtım eğitimini ver.
+14. Şirketten yazılı nihai kabul al.
+
+Bağımlılıklar
+-------------
+- WP-01 ve WP-02 tamamlanmış olmalı
+- WP-03 marka/içerik onayı tamamlanmış olmalı
+- WP-09 canlı ortam hazır olmalı
+- Gerçek ürün verileri ve fotoğrafları teslim edilmiş olmalı
+
+Riskler
+-------
+- Yanlış Shopier URL eşleştirmesi
+- Fotoğrafın başka fiziksel kopyayı göstermesi
+- Fiyat/stok sapması
+- Temsili ürün veya ön izleme bandının canlıda kalması
+- Kırık/güvensiz dış bağlantı
+- Ürün sahibi kabulü olmadan yayın
+
+Kabul kriterleri
+----------------
+- Her gerçek ürünün ön/arka fotoğrafı ve kondisyon notu vardır.
+- Her satışa açık ürün geçerli HTTPS Shopier URL'sine gider.
+- Fiyat ve stok Shopier ile mutabıktır.
+- Taslak/gizli ürünler kamuya açık değildir.
+- Satılan/temsili ürünlerde aktif satın alma CTA'sı yoktur.
+- Nihai marka ve kurumsal içerik onaylıdır.
+- Canlı site regresyon ve kabul testlerinden geçmiştir.
+- Operasyon sorumlusu yeni ürün ekleme ve yeniden yayınlamayı uygulayabilir.
+
+Beklenen kanıt veya ekran görüntüleri
+-------------------------------------
+- Ürün sahibi onaylı envanter
+- Shopier ürün sayfaları
+- Statik ürün detayları
+- URL eşleştirme kontrol çıktısı
+- Mobil/masaüstü son ekranlar
+- Son test raporu
+- Eğitim/teslim tutanağı
+- Yazılı şirket kabulü
+
+Sorumlu taraf
+-------------
+İçerik: Ürün sahibi/kondisyon sorumlusu
+Shopier: Şirket operasyon yetkilisi
+Teknik eşleştirme ve test: Proje ekibi
+Nihai kabul: Şirket yetkilisi
+
+Önerilen ilk eylem
+------------------
+İlk 3 gerçek kart için pilot ürün paketi hazırlamak: iç ID, gerçek ön/arka
+fotoğraf, metadata, kondisyon notu, fiyat, stok ve Shopier URL'si.
+
+Git'e asla eklenmeyecekler
+--------------------------
+- Müşteri veya sipariş verileri
+- Shopier/Natro erişim bilgileri
+- Ürün tedarikçisinin gizli kişisel verileri
+- Lisanssız üçüncü taraf görselleri
+- Muhasebe belgelerinin ham kopyaları
+
+Şirket/mali müşavir/hukukçu ile doğrulanacaklar
+-----------------------------------------------
+- Ürün içerik ve fiyat onayı
+- Kondisyon/orijinallik iddiaları
+- Fatura ve iade işlemleri
+- Canlı marka, iletişim ve yasal metinler
+
+======================================================================
+7. ÖNERİLEN YENİDEN BAŞLATMA SIRASI
+======================================================================
+
+1. WP-01 — Doğru şirket sahipliği ve Shopier ticari hesap
+2. WP-03 — Nihai marka, domain ve iş içeriği onayı
+3. WP-02 — Shopier mağaza/kargo/operasyon yapılandırması
+4. WP-10'un içerik bölümü — Gerçek ürünler ve URL eşleştirmesi
+5. WP-09 — Natro domain, SSL ve canlı dağıtım
+6. WP-10'un kabul bölümü — Canlı regresyon, eğitim ve nihai teslim
+
+Not: WP-10 iki aşamada yürütülür. Gerçek ürün hazırlığı WP-09 öncesinde;
+canlı kabul ve handover WP-09 sonrasında tamamlanır.
+
+======================================================================
+8. BİRLEŞİK ŞİRKET BİLGİSİ KONTROL LİSTESİ
+======================================================================
+
+- [ ] Ticari unvan
+- [ ] Şirket türü
+- [ ] Vergi dairesi ve vergi numarası
+- [ ] MERSİS/ticaret sicil bilgisi (gerekiyorsa)
+- [ ] Merkez adresi
+- [ ] Yetkili kişi
+- [ ] Kurumsal e-posta
+- [ ] Şirket kontrollü telefon
+- [ ] Şirket IBAN'ı
+- [ ] Mali müşavir ve teyit kanalı
+- [ ] Müşteri destek e-postası/telefonu
+- [ ] Marka adı
+- [ ] Alan adı
+- [ ] Kamuya açık şirket bilgileri
+- [ ] Kargo/paketleme sorumlusu
+- [ ] Ürün/kondisyon sorumlusu
+
+======================================================================
+9. BİRLEŞİK ERİŞİM VE KİMLİK BİLGİSİ KONTROL LİSTESİ
+======================================================================
+
+- [ ] Shopier ticari hesap
+- [ ] Shopier hesap sahibi kararı
+- [ ] Shopier MFA cihazı ve güvenli kurtarma prosedürü
+- [ ] Kurumsal e-posta MFA
+- [ ] Natro müşteri paneli yetkisi
+- [ ] Alan adı/DNS yönetim yetkisi
+- [ ] FTPS/SFTP veya güvenli dosya aktarım yöntemi
+- [ ] SSL yönetim yetkisi
+- [ ] Erişim iptal/devir prosedürü
+- [ ] Parola yöneticisi
+
+Bu listedeki sırlar teslim raporuna veya Git'e yazılmaz. Yalnız "mevcut /
+doğrulandı" durumu kaydedilir.
+
+======================================================================
+10. BİRLEŞİK GERÇEK ÜRÜN İÇERİĞİ KONTROL LİSTESİ
+======================================================================
+
+Her ürün için:
+
+- [ ] Benzersiz iç ürün ID
+- [ ] Kart adı
+- [ ] Set adı ve kodu
+- [ ] Koleksiyon numarası
+- [ ] Dil
+- [ ] Nadirlik
+- [ ] Finish/baskı türü
+- [ ] Kondisyon derecesi
+- [ ] Açık kondisyon notu
+- [ ] Gerçek ön fotoğraf
+- [ ] Gerçek arka fotoğraf
+- [ ] Gerekli kusur detayları
+- [ ] Açıklama
+- [ ] Fiyat
+- [ ] Stok
+- [ ] Kategori ve kargo tipi
+- [ ] Tam HTTPS Shopier URL'si
+- [ ] Ürün sahibi onayı
+
+======================================================================
+11. BİRLEŞİK NATRO DAĞITIM KONTROL LİSTESİ
+======================================================================
+
+- [ ] Hosting hesabı ve platform türü doğrulandı
+- [ ] Nihai domain belirlendi
+- [ ] Web kök dizini doğrulandı
+- [ ] Mevcut site yedeği alındı
+- [ ] DNS doğru
+- [ ] SSL etkin ve yenileme sorumlusu belli
+- [ ] Canonical domain seçildi
+- [ ] Son production build temiz
+- [ ] dist/ içeriği güvenli yöntemle yüklendi
+- [ ] HTTP -> HTTPS yönlendirmesi çalışıyor
+- [ ] 404 çalışıyor
+- [ ] Cache/güvenlik başlıkları platforma göre uygulandı
+- [ ] .git, .env, kaynak kod ve source map yayınlanmadı
+- [ ] Canlı smoke test geçti
+- [ ] Rollback paketi okunabilir
+
+======================================================================
+12. BİRLEŞİK SHOPIER CANLIYA ÇIKIŞ KONTROL LİSTESİ
+======================================================================
+
+- [ ] Ticari hesap aktif ve doğru şirkete ait
+- [ ] Şirket IBAN'ı doğru
+- [ ] MFA etkin
+- [ ] Güncel işlem bedelleri görüldü
+- [ ] Mağaza adı/logo/banner onaylı
+- [ ] Kategoriler ve kargo ayarları doğru
+- [ ] Fatura yöntemi teyitli
+- [ ] İade prosedürü hazır
+- [ ] Gerçek ürünler ve fotoğraflar onaylı
+- [ ] Stok ve fiyatlar doğru
+- [ ] Ürün linkleri statik siteyle eşleşiyor
+- [ ] Test siparişi/kargo kapanışı tamam
+- [ ] Müşteri takip akışı doğrulandı
+- [ ] Hukuki/mali açık karar kalmadı
+
+======================================================================
+13. "MEVCUT OLMADAN BAŞLAMA" KAPILARI
+======================================================================
+
+Aşağıdakilerden biri eksikse ilgili paket başlatılmaz:
+
+WP-01 için:
+- Doğru şirket unvanı ve yetkili
+- Şirket IBAN'ı
+- Kurumsal e-posta/telefon
+- Mali müşavir temas noktası
+
+WP-02 için:
+- Aktif ve güvenli Shopier ticari hesabı
+- Şirket onaylı kargo ve operasyon kararları
+- Kondisyon sorumlusu
+
+WP-03 için:
+- Marka adı, domain ve iletişim kararı
+- Logo/kimlik onayı
+- Ürün sahibi içerik onayı
+
+WP-09 için:
+- Natro yetkili erişimi
+- Nihai domain
+- Yedek ve rollback kararı
+- Son doğrulanmış production build
+
+WP-10 için:
+- Gerçek ürünlerin ön/arka fotoğrafları
+- Kondisyon notları
+- Fiyat/stok
+- Shopier ürün URL'leri
+- Şirket kabul yetkilisi
+
+======================================================================
+14. SON DURUM
+======================================================================
+
+WP-04, WP-05, WP-06, WP-07 ve WP-08 şirket hesabı gerektirmeden
+tamamlanabilir/tamamlanmıştır. Bu rapordaki WP-01, WP-02, WP-03, WP-09 ve
+WP-10 için gerçek hesap veya canlı ortam işlemi yapılmamıştır.
+
+Bir sonraki yeniden başlatma tetikleyicisi:
+
+"Şirket yetkilisi; ticari unvan, yetkili kişi, şirket IBAN'ı, kurumsal
+iletişim, nihai marka/domain kararı ve Shopier/Natro erişiminin hazır olduğunu
+yazılı olarak doğrular."
+
