@@ -1,0 +1,45 @@
+﻿---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CardTile from "../../components/CardTile.astro";
+const cards = (await getCollection("cards")).sort((a,b) => a.data.sortOrder - b.data.sortOrder);
+const conditions = [...new Set(cards.map(c => c.data.condition))];
+const languages = [...new Set(cards.map(c => c.data.language))];
+---
+<BaseLayout title="Kartlar" description="Koleksiyon kartlarÄ±nÄ± set, dil ve kondisyona gÃ¶re keÅŸfedin.">
+  <section class="catalog-intro shell"><p class="eyebrow">KÃ¼ratÃ¶rlÃ¼ seÃ§ki</p><h1>TÃ¼m kartlar</h1><p>Her kart, satÄ±ÅŸtaki fiziksel kopyayÄ± temsil eder. GÃ¼ncel stok ve fiyat Shopier sayfasÄ±nda doÄŸrulanÄ±r.</p></section>
+  <section class="catalog shell">
+    <aside class="filters" aria-label="Kart filtreleri">
+      <label>Arama<input id="search" type="search" placeholder="Kart veya set araâ€¦" /></label>
+      <label>Kondisyon<select id="condition"><option value="">TÃ¼mÃ¼</option>{conditions.map(x => <option>{x}</option>)}</select></label>
+      <label>Dil<select id="language"><option value="">TÃ¼mÃ¼</option>{languages.map(x => <option>{x}</option>)}</select></label>
+      <label>Durum<select id="availability"><option value="">TÃ¼mÃ¼</option><option value="available">SatÄ±ÅŸta</option><option value="sold">SatÄ±ldÄ±</option></select></label>
+      <button id="reset" class="text-button" type="button">Filtreleri temizle</button>
+    </aside>
+    <div><div class="results-head"><p><strong id="count">{cards.length}</strong> kart</p><p>SeÃ§ki / 2026</p></div><div id="grid" class="card-grid">{cards.map(card => <CardTile card={card} />)}</div><p id="empty" class="empty" hidden>Bu filtrelerle eÅŸleÅŸen kart bulunamadÄ±.</p></div>
+  </section>
+  <script>
+    const search = document.querySelector<HTMLInputElement>("#search")!;
+    const condition = document.querySelector<HTMLSelectElement>("#condition")!;
+    const language = document.querySelector<HTMLSelectElement>("#language")!;
+    const availability = document.querySelector<HTMLSelectElement>("#availability")!;
+    const controls: Array<HTMLInputElement | HTMLSelectElement> = [search, condition, language, availability];
+    const tiles = [...document.querySelectorAll<HTMLElement>("[data-card]")];
+    const count = document.querySelector<HTMLElement>("#count")!;
+    const empty = document.querySelector<HTMLElement>("#empty")!;
+    const reset = document.querySelector<HTMLButtonElement>("#reset")!;
+    const update = () => {
+      const q = search.value.toLowerCase().trim();
+      let visible = 0;
+      tiles.forEach(tile => {
+        const show = (!q || tile.dataset.search?.includes(q)) && (!condition.value || tile.dataset.condition === condition.value) && (!language.value || tile.dataset.language === language.value) && (!availability.value || tile.dataset.availability === availability.value);
+        tile.hidden = !show; if (show) visible++;
+      });
+      count.textContent = String(visible);
+      empty.hidden = visible !== 0;
+    };
+    controls.forEach(control => control.addEventListener("input", update));
+    reset.addEventListener("click", () => { controls.forEach(c => c.value = ""); update(); });
+  </script>
+</BaseLayout>
+

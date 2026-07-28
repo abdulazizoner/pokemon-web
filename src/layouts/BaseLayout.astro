@@ -1,0 +1,56 @@
+---
+import { store } from "../config/store";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = store.name, description = store.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, store.siteUrl);
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#f4f0e8" />
+    <title>{title === store.name ? title : `${title} — ${store.name}`}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#icerik">İçeriğe geç</a>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label={`${store.name} ana sayfa`}>
+        <span class="brand-mark" aria-hidden="true">P/A</span>
+        <span>{store.name}</span>
+      </a>
+      <nav aria-label="Ana menü">
+        <a href="/kartlar">Kartlar</a>
+        <a href="/hakkimizda">Hakkımızda</a>
+        <a href="/sss">SSS</a>
+      </nav>
+      <a class="button button-compact" href="/kartlar">Arşivi keşfet</a>
+    </header>
+    <main id="icerik"><slot /></main>
+    <footer class="site-footer">
+      <div><span class="brand-mark" aria-hidden="true">P/A</span><strong>{store.name}</strong></div>
+      <p>Bağımsız bir koleksiyon kartı vitrini. Pokémon ile resmî bağlantımız yoktur.</p>
+      <div class="footer-links">
+        <a href="/kartlar">Kartlar</a><a href="/hakkimizda">Hakkımızda</a><a href="/sss">SSS</a>
+      </div>
+    </footer>
+    <script>
+      document.querySelectorAll("[data-flip]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const card = button.closest("[data-card]");
+          card?.classList.toggle("is-flipped");
+          button.setAttribute("aria-pressed", String(card?.classList.contains("is-flipped")));
+          button.textContent = card?.classList.contains("is-flipped") ? "Önü göster" : "Arkayı göster";
+        });
+      });
+    </script>
+  </body>
+</html>
