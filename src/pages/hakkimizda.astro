@@ -1,4 +1,42 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { store } from "../config/store";
 ---
-<BaseLayout title="Hakkımızda"><section class="prose shell"><p class="eyebrow">Arşivin ardında</p><h1>Kartlara ürün değil,<br />koleksiyon parçası gibi bakıyoruz.</h1><p class="lede">Paralel Arşiv şimdilik temsili bir marka adıdır. Gerçek marka ve şirket bilgileri WP-03 tamamlandığında buraya eklenecektir.</p><h2>Yaklaşımımız</h2><p>Her fiziksel kartı kendi fotoğrafları, açık kondisyon notu ve temel katalog bilgileriyle sunmayı amaçlıyoruz. Satış işlemi ise Shopier üzerinde tamamlanır.</p></section></BaseLayout>
+
+<BaseLayout
+  title="Hakkımızda"
+  description="Koleksiyon kartlarını gerçek ürün fotoğrafları ve açık kondisyon notlarıyla sunma yaklaşımımız."
+>
+  <section class="prose shell">
+    <p class="eyebrow">Arşivin ardında</p>
+    <h1>Kartlara ürün değil,<br />koleksiyon parçası gibi bakıyoruz.</h1>
+    <p class="lede">
+      {store.name} şimdilik temsili bir marka adıdır. Gerçek marka ve şirket bilgileri WP-03 tamamlandığında
+      buraya eklenecektir.
+    </p>
+    <div class="info-columns">
+      <section>
+        <h2>Görsel şeffaflık</h2>
+        <p>
+          Gerçek içerik aşamasında her fiziksel kartın ön ve arka yüzü kendi fotoğraflarıyla
+          gösterilecektir. Görünür kusurlar ayrıca not edilir.
+        </p>
+      </section>
+      <section>
+        <h2>Açık kondisyon</h2>
+        <p>
+          Standart kondisyon terimleri, insan tarafından okunabilen ayrıntılı bir kondisyon notuyla
+          birlikte kullanılır.
+        </p>
+      </section>
+      <section>
+        <h2>Ayrı satış altyapısı</h2>
+        <p>
+          Bu site bir ürün vitrinidir. Satış, ödeme ve sipariş süreçleri ürünün Shopier sayfasında
+          tamamlanır.
+        </p>
+      </section>
+    </div>
+    <p class="legal-note">{store.legalDisclaimer}</p>
+  </section>
+</BaseLayout>

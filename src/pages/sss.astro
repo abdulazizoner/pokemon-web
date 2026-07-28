@@ -1,10 +1,48 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 const faqs = [
-  ["Satın alma işlemi nerede gerçekleşiyor?", "Ürün sayfasındaki bağlantı sizi Shopier’e götürür. Ödeme ve sipariş işlemleri Shopier üzerinde tamamlanır."],
-  ["Fotoğraflar gerçek ürüne mi ait?", "Canlı içerikte her ürün için satıştaki fiziksel karta ait ön ve arka yüz fotoğrafları kullanılacaktır."],
-  ["Kondisyon nasıl belirleniyor?", "Kondisyon ürün sahibi tarafından standart terimler ve görünür kusur notlarıyla belirtilir."],
-  ["Fiyat veya stok farklı görünürse ne olur?", "Güncel ve geçerli bilgi Shopier ürün sayfasındaki bilgidir."]
+  [
+    "Satın alma işlemi nerede gerçekleşiyor?",
+    "Ürün sayfasındaki bağlantı sizi Shopier’e götürür. Ödeme ve sipariş işlemleri Shopier üzerinde tamamlanır.",
+  ],
+  [
+    "Fotoğraflar gerçek ürüne mi ait?",
+    "Canlı içerikte her ürün için satıştaki fiziksel karta ait ön ve arka yüz fotoğrafları kullanılacaktır.",
+  ],
+  [
+    "Kondisyon nasıl belirleniyor?",
+    "Kondisyon ürün sahibi tarafından standart terimler ve görünür kusur notlarıyla belirtilir.",
+  ],
+  [
+    "Fiyat veya stok farklı görünürse ne olur?",
+    "Güncel ve geçerli bilgi Shopier ürün sayfasındaki bilgidir.",
+  ],
+  [
+    "Neden bazı ürünlerde satın alma düğmesi yok?",
+    "Satılmış, yakında yayımlanacak veya temsili ürünlerde satın alma bağlantısı bilinçli olarak kapalı tutulur.",
+  ],
+  [
+    "Bu resmî bir Pokémon mağazası mı?",
+    "Hayır. Mağaza Pokémon, Nintendo, Creatures Inc. veya GAME FREAK ile resmî bağlantıya sahip değildir.",
+  ],
 ];
 ---
-<BaseLayout title="Sıkça Sorulan Sorular"><section class="prose shell"><p class="eyebrow">Merak edilenler</p><h1>Sıkça sorulan<br />sorular.</h1><div class="faq">{faqs.map(([q,a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</div></section></BaseLayout>
+
+<BaseLayout
+  title="Sıkça Sorulan Sorular"
+  description="Ürün fotoğrafları, kondisyon, Shopier satın alma ve stok bilgisi hakkında yanıtlar."
+  ><section class="prose shell">
+    <p class="eyebrow">Merak edilenler</p><h1>Sıkça sorulan<br />sorular.</h1><div class="faq">
+      {
+        faqs.map(([q, a]) => (
+          <details>
+            <>
+              <summary>{q}</summary>
+              <p>{a}</p>
+            </>
+          </details>
+        ))
+      }
+    </div>
+  </section></BaseLayout
+>

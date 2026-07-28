@@ -1,45 +1,188 @@
-﻿---
+---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CardTile from "../../components/CardTile.astro";
-const cards = (await getCollection("cards")).sort((a,b) => a.data.sortOrder - b.data.sortOrder);
-const conditions = [...new Set(cards.map(c => c.data.condition))];
-const languages = [...new Set(cards.map(c => c.data.language))];
+import { isPublicProduct } from "../../lib/product-policy";
+
+const cards = (await getCollection("cards"))
+  .filter((card) => isPublicProduct(card.data))
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+const sets = [...new Set(cards.map((card) => card.data.setName))].sort((a, b) =>
+  a.localeCompare(b, "tr"),
+);
+const conditions = [...new Set(cards.map((card) => card.data.condition))];
+const languages = [...new Set(cards.map((card) => card.data.language))];
+const rarities = [...new Set(cards.map((card) => card.data.rarity))].sort((a, b) =>
+  a.localeCompare(b, "tr"),
+);
 ---
-<BaseLayout title="Kartlar" description="Koleksiyon kartlarÄ±nÄ± set, dil ve kondisyona gÃ¶re keÅŸfedin.">
-  <section class="catalog-intro shell"><p class="eyebrow">KÃ¼ratÃ¶rlÃ¼ seÃ§ki</p><h1>TÃ¼m kartlar</h1><p>Her kart, satÄ±ÅŸtaki fiziksel kopyayÄ± temsil eder. GÃ¼ncel stok ve fiyat Shopier sayfasÄ±nda doÄŸrulanÄ±r.</p></section>
+
+<BaseLayout
+  title="Kartlar"
+  description="Koleksiyon kartlarını set, dil, nadirlik ve kondisyona göre keşfedin."
+>
+  <section class="catalog-intro shell">
+    <p class="eyebrow">Küratörlü seçki</p>
+    <h1>Tüm kartlar</h1>
+    <p>
+      Her kayıt tek bir fiziksel kopyayı temsil eder. Güncel stok ve fiyat bilgisi, gerçek ürünler
+      yayımlandığında Shopier sayfasında doğrulanır.
+    </p>
+  </section>
   <section class="catalog shell">
     <aside class="filters" aria-label="Kart filtreleri">
-      <label>Arama<input id="search" type="search" placeholder="Kart veya set araâ€¦" /></label>
-      <label>Kondisyon<select id="condition"><option value="">TÃ¼mÃ¼</option>{conditions.map(x => <option>{x}</option>)}</select></label>
-      <label>Dil<select id="language"><option value="">TÃ¼mÃ¼</option>{languages.map(x => <option>{x}</option>)}</select></label>
-      <label>Durum<select id="availability"><option value="">TÃ¼mÃ¼</option><option value="available">SatÄ±ÅŸta</option><option value="sold">SatÄ±ldÄ±</option></select></label>
-      <button id="reset" class="text-button" type="button">Filtreleri temizle</button>
+      <div class="filters-heading">
+        <h2>Filtreler</h2>
+        <button id="reset" class="text-button" type="button">Temizle</button>
+      </div>
+      <label>
+        Arama
+        <input id="search" type="search" placeholder="Kart, set veya numara…" autocomplete="off" />
+      </label>
+      <label>
+        Set
+        <select id="set">
+          <option value="">Tümü</option>
+          {sets.map((value) => <option>{value}</option>)}
+        </select>
+      </label>
+      <label>
+        Kondisyon
+        <select id="condition">
+          <option value="">Tümü</option>
+          {conditions.map((value) => <option>{value}</option>)}
+        </select>
+      </label>
+      <label>
+        Dil
+        <select id="language">
+          <option value="">Tümü</option>
+          {languages.map((value) => <option>{value}</option>)}
+        </select>
+      </label>
+      <label>
+        Nadirlik
+        <select id="rarity">
+          <option value="">Tümü</option>
+          {rarities.map((value) => <option>{value}</option>)}
+        </select>
+      </label>
+      <label>
+        Durum
+        <select id="availability">
+          <option value="">Tümü</option>
+          <option value="available">Satışta</option>
+          <option value="coming-soon">Yakında</option>
+          <option value="sold">Satıldı</option>
+        </select>
+      </label>
     </aside>
-    <div><div class="results-head"><p><strong id="count">{cards.length}</strong> kart</p><p>SeÃ§ki / 2026</p></div><div id="grid" class="card-grid">{cards.map(card => <CardTile card={card} />)}</div><p id="empty" class="empty" hidden>Bu filtrelerle eÅŸleÅŸen kart bulunamadÄ±.</p></div>
+    <div class="catalog-results">
+      <div class="results-head">
+        <p aria-live="polite"><strong id="count">{cards.length}</strong> kart gösteriliyor</p>
+        <label>
+          <span>Sırala</span>
+          <select id="sort">
+            <option value="curated">Önerilen</option>
+            <option value="newest">En yeni</option>
+            <option value="name">Ada göre</option>
+          </select>
+        </label>
+      </div>
+      <div id="grid" class="card-grid">{cards.map((card) => <CardTile card={card} />)}</div>
+      <div id="empty" class="empty" role="status" hidden>
+        <p class="eyebrow">Sonuç bulunamadı</p>
+        <h2>Filtreleri biraz genişletin.</h2>
+        <p>Arama ifadesini kısaltabilir veya filtreleri temizleyebilirsiniz.</p>
+        <button class="button" type="button" data-empty-reset>Filtreleri temizle</button>
+      </div>
+    </div>
   </section>
   <script>
     const search = document.querySelector<HTMLInputElement>("#search")!;
+    const set = document.querySelector<HTMLSelectElement>("#set")!;
     const condition = document.querySelector<HTMLSelectElement>("#condition")!;
     const language = document.querySelector<HTMLSelectElement>("#language")!;
+    const rarity = document.querySelector<HTMLSelectElement>("#rarity")!;
     const availability = document.querySelector<HTMLSelectElement>("#availability")!;
-    const controls: Array<HTMLInputElement | HTMLSelectElement> = [search, condition, language, availability];
-    const tiles = [...document.querySelectorAll<HTMLElement>("[data-card]")];
+    const sort = document.querySelector<HTMLSelectElement>("#sort")!;
+    const controls = { search, set, condition, language, rarity, availability, sort };
+    const filterControls = [search, set, condition, language, rarity, availability];
+    const grid = document.querySelector<HTMLElement>("#grid")!;
+    const tiles = [...grid.querySelectorAll<HTMLElement>("[data-card]")];
     const count = document.querySelector<HTMLElement>("#count")!;
     const empty = document.querySelector<HTMLElement>("#empty")!;
-    const reset = document.querySelector<HTMLButtonElement>("#reset")!;
-    const update = () => {
-      const q = search.value.toLowerCase().trim();
-      let visible = 0;
-      tiles.forEach(tile => {
-        const show = (!q || tile.dataset.search?.includes(q)) && (!condition.value || tile.dataset.condition === condition.value) && (!language.value || tile.dataset.language === language.value) && (!availability.value || tile.dataset.availability === availability.value);
-        tile.hidden = !show; if (show) visible++;
+    const resetButtons = document.querySelectorAll<HTMLButtonElement>("#reset, [data-empty-reset]");
+
+    const values = () => ({
+      search: search.value.toLocaleLowerCase("tr").trim(),
+      set: set.value,
+      condition: condition.value,
+      language: language.value,
+      rarity: rarity.value,
+      availability: availability.value,
+      sort: sort.value,
+    });
+
+    const updateUrl = () => {
+      const params = new URLSearchParams();
+      Object.entries(values()).forEach(([key, value]) => {
+        if (value && !(key === "sort" && value === "curated")) params.set(key, value);
       });
+      history.replaceState(null, "", `${location.pathname}${params.size ? `?${params}` : ""}`);
+    };
+
+    const update = () => {
+      const value = values();
+      let visible = 0;
+      tiles.forEach((tile) => {
+        const show =
+          (!value.search || tile.dataset.search?.includes(value.search)) &&
+          (!value.set || tile.dataset.set === value.set) &&
+          (!value.condition || tile.dataset.condition === value.condition) &&
+          (!value.language || tile.dataset.language === value.language) &&
+          (!value.rarity || tile.dataset.rarity === value.rarity) &&
+          (!value.availability || tile.dataset.availability === value.availability);
+        tile.hidden = !show;
+        if (show) visible += 1;
+      });
+
+      const sorted = [...tiles].sort((a, b) => {
+        if (value.sort === "newest") return Number(b.dataset.date) - Number(a.dataset.date);
+        if (value.sort === "name")
+          return (a.dataset.name ?? "").localeCompare(b.dataset.name ?? "", "tr");
+        return Number(a.dataset.order) - Number(b.dataset.order);
+      });
+      sorted.forEach((tile) => grid.append(tile));
       count.textContent = String(visible);
       empty.hidden = visible !== 0;
+      updateUrl();
     };
-    controls.forEach(control => control.addEventListener("input", update));
-    reset.addEventListener("click", () => { controls.forEach(c => c.value = ""); update(); });
+
+    const params = new URLSearchParams(location.search);
+    Object.entries(controls).forEach(([key, control]) => {
+      const value = params.get(key);
+      if (!value) return;
+      if (key === "search") {
+        control.value = value;
+      } else if (
+        control instanceof HTMLSelectElement &&
+        [...control.options].some((option) => option.value === value)
+      ) {
+        control.value = value;
+      }
+    });
+
+    filterControls.forEach((control) => control.addEventListener("input", update));
+    sort.addEventListener("change", update);
+    resetButtons.forEach((button) =>
+      button.addEventListener("click", () => {
+        filterControls.forEach((control) => (control.value = ""));
+        sort.value = "curated";
+        update();
+        search.focus();
+      }),
+    );
+    update();
   </script>
 </BaseLayout>
-

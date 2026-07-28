@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { store } from "../config/store";
+---
+
+<BaseLayout
+  title="İletişim"
+  description="Paralel Arşiv iletişim bilgileri ve müşteri destek kanalları."
+>
+  <section class="prose shell">
+    <p class="eyebrow">Bize ulaşın</p>
+    <h1>Kartlar hakkında<br />konuşalım.</h1>
+    <p class="lede">
+      Bu sayfa kişisel veri toplayan bir form içermez. Kesin şirket ve iletişim bilgileri WP-03
+      tamamlandığında güncellenecektir.
+    </p>
+    <div class="contact-grid">
+      <div>
+        <p class="overline">E-posta</p>
+        <a href={`mailto:${store.email}`}>{store.email}</a>
+        <small>Geçici iletişim adresi</small>
+      </div>
+      <div>
+        <p class="overline">Sipariş desteği</p>
+        <p>Sipariş numaranızla birlikte Shopier mağaza iletişim kanalını kullanın.</p>
+      </div>
+    </div>
+    <p class="legal-note">{store.legalDisclaimer}</p>
+  </section>
+</BaseLayout>

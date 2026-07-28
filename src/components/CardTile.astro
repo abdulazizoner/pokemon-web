@@ -1,24 +1,60 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { availabilityLabels } from "../lib/product-policy";
 const { card } = Astro.props as { card: CollectionEntry<"cards"> };
 const d = card.data;
-const detailUrl = `/kartlar/${card.id}`;
-const availability = { available: "Satışta", reserved: "Rezerve", sold: "Satıldı" }[d.availability];
+const detailUrl = `/kartlar/${d.slug}`;
+const availability = availabilityLabels[d.availability];
 ---
 
-<article class="card-tile" data-card data-search={`${d.name} ${d.setName} ${d.rarity}`.toLowerCase()} data-condition={d.condition} data-language={d.language} data-availability={d.availability}>
+<article
+  class="card-tile"
+  data-card
+  data-search={`${d.name} ${d.setName} ${d.setCode ?? ""} ${d.collectorNumber} ${d.rarity}`.toLocaleLowerCase(
+    "tr",
+  )}
+  data-set={d.setName}
+  data-condition={d.condition}
+  data-language={d.language}
+  data-rarity={d.rarity}
+  data-availability={d.availability}
+  data-name={d.name.toLocaleLowerCase("tr")}
+  data-date={d.publishedAt.getTime()}
+  data-order={d.sortOrder}
+>
   <div class="card-visual">
     <a href={detailUrl} aria-label={`${d.name} detayını görüntüle`}>
-      <img class="card-front" src={d.frontImage} alt={`${d.name} ön yüz temsili görseli`} width="600" height="840" loading="lazy" />
-      <img class="card-back" src={d.backImage} alt={`${d.name} arka yüz temsili görseli`} width="600" height="840" loading="lazy" />
+      <img
+        class="card-front"
+        src={d.frontImage}
+        alt={d.frontAlt}
+        width="600"
+        height="840"
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        class="card-back"
+        src={d.backImage}
+        alt={d.backAlt}
+        width="600"
+        height="840"
+        loading="lazy"
+        decoding="async"
+      />
     </a>
     <span class:list={["status", d.availability]}>{availability}</span>
+    {d.isPlaceholder && <span class="placeholder-badge">Temsili</span>}
     <button class="flip-button" type="button" data-flip aria-pressed="false">Arkayı göster</button>
   </div>
   <div class="card-meta">
     <p class="overline">{d.setName} · {d.collectorNumber}</p>
     <h3><a href={detailUrl}>{d.name}</a></h3>
     <div class="tag-row"><span>{d.condition}</span><span>{d.language}</span></div>
-    <div class="price-row"><strong>{d.displayPrice}</strong><a href={detailUrl}>İncele <span aria-hidden="true">↗</span></a></div>
+    <div class="price-row">
+      <strong>{d.displayPrice ?? "Fiyat yakında"}</strong><a href={detailUrl}
+        >İncele <span aria-hidden="true">↗</span></a
+      >
+    </div>
   </div>
 </article>

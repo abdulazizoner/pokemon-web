@@ -5,9 +5,20 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
+  ogType?: "website" | "product";
+  jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
-const { title = store.name, description = store.description } = Astro.props;
+const {
+  title = store.name,
+  description = store.description,
+  noindex = false,
+  ogType = "website",
+  jsonLd,
+} = Astro.props;
 const canonical = new URL(Astro.url.pathname, store.siteUrl);
+const socialImage = new URL("/og.png", store.siteUrl);
+const fullTitle = title === store.name ? title : `${title} — ${store.name}`;
 ---
 
 <!doctype html>
@@ -17,11 +28,31 @@ const canonical = new URL(Astro.url.pathname, store.siteUrl);
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:site_name" content={store.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
     <meta name="theme-color" content="#f4f0e8" />
-    <title>{title === store.name ? title : `${title} — ${store.name}`}</title>
+    <title>{fullTitle}</title>
+    {jsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>
     <a class="skip-link" href="#icerik">İçeriğe geç</a>
+    {
+      store.isPlaceholderBrand && (
+        <aside class="preview-banner" aria-label="Ön izleme bildirimi">
+          Ön izleme · Marka ve ürün bilgileri temsili
+        </aside>
+      )
+    }
     <header class="site-header">
       <a class="brand" href="/" aria-label={`${store.name} ana sayfa`}>
         <span class="brand-mark" aria-hidden="true">P/A</span>
@@ -31,24 +62,39 @@ const canonical = new URL(Astro.url.pathname, store.siteUrl);
         <a href="/kartlar">Kartlar</a>
         <a href="/hakkimizda">Hakkımızda</a>
         <a href="/sss">SSS</a>
+        <a href="/iletisim">İletişim</a>
       </nav>
+      <details class="mobile-nav">
+        <summary>Menü</summary>
+        <nav aria-label="Mobil menü">
+          <a href="/kartlar">Kartlar</a>
+          <a href="/hakkimizda">Hakkımızda</a>
+          <a href="/sss">SSS</a>
+          <a href="/kargo-ve-iade">Kargo ve iade</a>
+          <a href="/iletisim">İletişim</a>
+        </nav>
+      </details>
       <a class="button button-compact" href="/kartlar">Arşivi keşfet</a>
     </header>
     <main id="icerik"><slot /></main>
     <footer class="site-footer">
       <div><span class="brand-mark" aria-hidden="true">P/A</span><strong>{store.name}</strong></div>
-      <p>Bağımsız bir koleksiyon kartı vitrini. Pokémon ile resmî bağlantımız yoktur.</p>
+      <p>{store.legalDisclaimer}</p>
       <div class="footer-links">
-        <a href="/kartlar">Kartlar</a><a href="/hakkimizda">Hakkımızda</a><a href="/sss">SSS</a>
+        <a href="/kartlar">Kartlar</a><a href="/kargo-ve-iade">Kargo ve iade</a><a href="/iletisim"
+          >İletişim</a
+        >
       </div>
     </footer>
     <script>
-      document.querySelectorAll("[data-flip]").forEach((button) => {
+      document.querySelectorAll<HTMLButtonElement>("[data-flip]").forEach((button) => {
         button.addEventListener("click", () => {
-          const card = button.closest("[data-card]");
+          const card = button.closest<HTMLElement>("[data-card]");
           card?.classList.toggle("is-flipped");
           button.setAttribute("aria-pressed", String(card?.classList.contains("is-flipped")));
-          button.textContent = card?.classList.contains("is-flipped") ? "Önü göster" : "Arkayı göster";
+          button.textContent = card?.classList.contains("is-flipped")
+            ? "Önü göster"
+            : "Arkayı göster";
         });
       });
     </script>

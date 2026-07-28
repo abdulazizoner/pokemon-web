@@ -1,0 +1,165 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CardTile from "../../components/CardTile.astro";
+import { availabilityLabels, canPurchase, isPublicProduct } from "../../lib/product-policy";
+import { store } from "../../config/store";
+
+export async function getStaticPaths() {
+  const cards = await getCollection("cards");
+  return cards
+    .filter((card) => isPublicProduct(card.data))
+    .map((card) => ({ params: { slug: card.data.slug }, props: { card } }));
+}
+
+const { card } = Astro.props as { card: CollectionEntry<"cards"> };
+const { Content } = await render(card);
+const d = card.data;
+const allCards = (await getCollection("cards")).filter(
+  (item) => isPublicProduct(item.data) && item.data.slug !== d.slug,
+);
+const related = allCards
+  .sort((a, b) => {
+    const aScore = Number(a.data.setName === d.setName) + Number(a.data.rarity === d.rarity);
+    const bScore = Number(b.data.setName === d.setName) + Number(b.data.rarity === d.rarity);
+    return bScore - aScore || a.data.sortOrder - b.data.sortOrder;
+  })
+  .slice(0, 3);
+const purchaseEnabled = canPurchase(d);
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Ana sayfa", item: store.siteUrl },
+    { "@type": "ListItem", position: 2, name: "Kartlar", item: `${store.siteUrl}/kartlar` },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: d.name,
+      item: `${store.siteUrl}/kartlar/${d.slug}`,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={d.seoTitle ?? d.name}
+  description={d.seoDescription ??
+    `${d.name}, ${d.setName}, ${d.condition} kondisyon koleksiyon kartı.`}
+  ogType="product"
+  jsonLd={breadcrumbJsonLd}
+>
+  <section class="product shell">
+    <div class="product-media" data-detail-gallery>
+      <div class="product-gallery">
+        <figure data-face="front">
+          <img src={d.frontImage} alt={d.frontAlt} width="600" height="840" fetchpriority="high" />
+          <figcaption>Ön yüz</figcaption>
+        </figure>
+        <figure data-face="back">
+          <img src={d.backImage} alt={d.backAlt} width="600" height="840" />
+          <figcaption>Arka yüz</figcaption>
+        </figure>
+        {
+          d.detailImages.map((image, index) => (
+            <figure>
+              <img src={image.src} alt={image.alt} width="600" height="840" loading="lazy" />
+              <figcaption>Detay {index + 1}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+      <div class="face-controls" aria-label="Ürün görseli seçimi">
+        <button type="button" data-show-face="front" aria-pressed="true">Ön yüz</button>
+        <button type="button" data-show-face="back" aria-pressed="false">Arka yüz</button>
+      </div>
+      <p class="gallery-note">JavaScript kapalıyken iki yüz de yan yana gösterilir.</p>
+    </div>
+    <div class="product-info">
+      <a class="back-link" href="/kartlar">← Tüm kartlar</a>
+      <p class="eyebrow">{d.setName} · {d.collectorNumber}</p>
+      <h1>{d.name}</h1>
+      <div class="product-state">
+        <span class:list={["status-inline", d.availability]}
+          >{availabilityLabels[d.availability]}</span
+        >
+        {d.isPlaceholder && <span class="placeholder-inline">Temsili içerik</span>}
+      </div>
+      <p class="product-price">{d.displayPrice ?? "Fiyat yakında"}</p>
+      <p class="product-description">{d.description}</p>
+      <dl>
+        <div><dt>Set</dt><dd>{d.setName}{d.setCode ? ` (${d.setCode})` : ""}</dd></div>
+        <div><dt>Koleksiyon no.</dt><dd>{d.collectorNumber}</dd></div>
+        <div><dt>Kondisyon</dt><dd>{d.condition}</dd></div>
+        <div><dt>Dil</dt><dd>{d.language}</dd></div>
+        <div><dt>Nadirlik</dt><dd>{d.rarity}</dd></div>
+        <div><dt>Baskı</dt><dd>{d.finish}</dd></div>
+      </dl>
+      <div class="condition-note">
+        <h2>Kondisyon notu</h2>
+        <p>{d.conditionNote}</p>
+      </div>
+      {
+        purchaseEnabled ? (
+          <a
+            class="button buy-button"
+            href={d.shopierUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Shopier’de satın al <span aria-hidden="true">↗</span>
+            <span class="sr-only">(yeni sekmede açılır)</span>
+          </a>
+        ) : (
+          <p class="unavailable-note" role="status">
+            {d.availability === "sold"
+              ? "Bu ürün satıldı; satın alma bağlantısı kapalıdır."
+              : "Bu temsili veya henüz yayımlanmamış ürün için satın alma bağlantısı etkin değildir."}
+          </p>
+        )
+      }
+      <p class="fine-print">
+        Satıştaki ürünlerde ödeme, sipariş ve güncel stok kontrolü Shopier üzerinde tamamlanır.
+      </p>
+      <Content />
+    </div>
+  </section>
+  {
+    related.length > 0 && (
+      <section class="section shell related">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Arşivden devam edin</p>
+            <h2>Benzer kartlar</h2>
+          </div>
+          <a class="text-link" href="/kartlar">
+            Tüm kartlar
+          </a>
+        </div>
+        <div class="card-grid">
+          {related.map((item) => (
+            <CardTile card={item} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+  <script>
+    const gallery = document.querySelector<HTMLElement>("[data-detail-gallery]");
+    if (gallery) {
+      gallery.classList.add("is-enhanced");
+      const figures = gallery.querySelectorAll<HTMLElement>("[data-face]");
+      const buttons = gallery.querySelectorAll<HTMLButtonElement>("[data-show-face]");
+      const selectFace = (face: string) => {
+        figures.forEach((figure) => (figure.hidden = figure.dataset.face !== face));
+        buttons.forEach((button) =>
+          button.setAttribute("aria-pressed", String(button.dataset.showFace === face)),
+        );
+      };
+      buttons.forEach((button) =>
+        button.addEventListener("click", () => selectFace(button.dataset.showFace ?? "front")),
+      );
+      selectFace("front");
+    }
+  </script>
+</BaseLayout>

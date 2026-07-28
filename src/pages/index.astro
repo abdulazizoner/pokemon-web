@@ -2,38 +2,120 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CardTile from "../components/CardTile.astro";
-const cards = (await getCollection("cards")).sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+import { isPublicProduct } from "../lib/product-policy";
+import { store } from "../config/store";
+const cards = (await getCollection("cards"))
+  .filter((card) => isPublicProduct(card.data))
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 const featured = cards.filter((card) => card.data.featured).slice(0, 3);
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: store.name,
+  description: "Koleksiyon kartları vitrini",
+  url: store.siteUrl,
+};
 ---
-<BaseLayout>
+
+<BaseLayout jsonLd={jsonLd}>
   <section class="hero shell">
     <div class="hero-copy">
       <p class="eyebrow">Nadir parçalar. Açık kondisyon. Gerçek fotoğraflar.</p>
       <h1>Koleksiyonunun<br /><em>eksik parçası</em><br />burada olabilir.</h1>
-      <p class="lede">Özenle seçilmiş koleksiyon kartlarını ayrıntılı kondisyon notlarıyla incele; satın alma işlemini Shopier güvencesiyle tamamla.</p>
-      <div class="hero-actions"><a class="button" href="/kartlar">Kartları keşfet</a><a class="text-link" href="#nasil">Nasıl çalışır?</a></div>
-      <div class="proof"><span><b>01</b> Gerçek ürün fotoğrafı</span><span><b>02</b> Şeffaf kondisyon notu</span><span><b>03</b> Shopier’e güvenli geçiş</span></div>
+      <p class="lede">
+        Özenle seçilmiş koleksiyon kartlarını ayrıntılı kondisyon notlarıyla incele; satıştaki
+        ürünlerin siparişini Shopier üzerinde tamamla.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href="/kartlar">Kartları keşfet</a><a class="text-link" href="#nasil"
+          >Nasıl çalışır?</a
+        >
+      </div>
+      <div class="proof">
+        <span><b>01</b> Fiziksel ürüne ait fotoğraf</span><span><b>02</b> Açık kondisyon notu</span
+        ><span><b>03</b> Shopier’e kontrollü geçiş</span>
+      </div>
     </div>
     <div class="hero-art" aria-label="Koleksiyon kartlarından oluşan temsili kompozisyon">
-      {cards.slice(0,3).map((card, i) => <img class={`hero-card hero-card-${i+1}`} src={card.data.frontImage} alt="" width="600" height="840" />)}
+      {
+        cards
+          .slice(0, 3)
+          .map((card, i) => (
+            <img
+              class={`hero-card hero-card-${i + 1}`}
+              src={card.data.frontImage}
+              alt=""
+              width="600"
+              height="840"
+            />
+          ))
+      }
       <span class="orbit orbit-one"></span><span class="orbit orbit-two"></span>
       <p>Seçki / 001</p>
     </div>
   </section>
 
-  <section class="ticker" aria-label="Mağaza özellikleri"><div>TEKİL KARTLAR <i>✦</i> GERÇEK FOTOĞRAFLAR <i>✦</i> AÇIK KONDİSYON <i>✦</i> GÜVENLİ ÖDEME <i>✦</i> ÖZENLİ PAKETLEME</div></section>
+  <section class="ticker" aria-label="Mağaza özellikleri">
+    <div>
+      TEKİL KARTLAR <i>✦</i> GERÇEK FOTOĞRAFLAR <i>✦</i> AÇIK KONDİSYON <i>✦</i> GÜVENLİ ÖDEME <i
+        >✦</i
+      > ÖZENLİ PAKETLEME
+    </div>
+  </section>
 
   <section class="section shell">
-    <div class="section-head"><div><p class="eyebrow">Editörün seçtikleri</p><h2>Öne çıkan kartlar</h2></div><a class="text-link" href="/kartlar">Tümünü gör</a></div>
+    <div class="section-head">
+      <div><p class="eyebrow">Editörün seçtikleri</p><h2>Öne çıkan kartlar</h2></div><a
+        class="text-link"
+        href="/kartlar">Tümünü gör</a
+      >
+    </div>
     <div class="card-grid">{featured.map((card) => <CardTile card={card} />)}</div>
   </section>
 
   <section id="nasil" class="process shell">
-    <div><p class="eyebrow">Basit ve şeffaf</p><h2>Kartı burada bul,<br />Shopier’de tamamla.</h2></div>
+    <div>
+      <p class="eyebrow">Basit ve şeffaf</p><h2>Kartı burada bul,<br />Shopier’de tamamla.</h2>
+    </div>
     <ol>
-      <li><span>01</span><div><h3>İncele</h3><p>Ön ve arka yüz fotoğraflarını, set bilgisini ve kondisyon notunu karşılaştır.</p></div></li>
-      <li><span>02</span><div><h3>Shopier’e geç</h3><p>Beğendiğin kartın güncel fiyat ve stok bilgisini Shopier ürün sayfasında doğrula.</p></div></li>
-      <li><span>03</span><div><h3>Güvenle tamamla</h3><p>Ödeme ve sipariş işlemlerini Shopier altyapısı üzerinden tamamla.</p></div></li>
+      <li>
+        <span>01</span><div>
+          <h3>İncele</h3><p>
+            Ön ve arka yüz fotoğraflarını, set bilgisini ve kondisyon notunu karşılaştır.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span>02</span><div>
+          <h3>Shopier’e geç</h3><p>
+            Beğendiğin kartın güncel fiyat ve stok bilgisini Shopier ürün sayfasında doğrula.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span>03</span><div>
+          <h3>Güvenle tamamla</h3><p>
+            Ödeme ve sipariş işlemlerini Shopier altyapısı üzerinden tamamla.
+          </p>
+        </div>
+      </li>
     </ol>
+  </section>
+  <section class="reassurance shell">
+    <p class="eyebrow">Bilmeniz gerekenler</p>
+    <div class="reassurance-grid">
+      <h2>Vitrin burada.<br />Satış Shopier’de.</h2>
+      <div>
+        <p>
+          Bu site ürünleri karşılaştırmanızı kolaylaştıran statik bir vitrindir. Sepet, ödeme ve
+          sipariş bilgileri burada tutulmaz.
+        </p>
+        <p>
+          Güncel fiyat ve stok bilgisi için ürünün Shopier sayfasını esas alın. Gerçek ürünler
+          eklendiğinde fotoğraflar listelenen fiziksel kopyayı gösterecektir.
+        </p>
+        <a class="text-link" href="/sss">Sıkça sorulan sorular</a>
+      </div>
+    </div>
   </section>
 </BaseLayout>
