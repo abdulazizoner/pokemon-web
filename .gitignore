@@ -10,4 +10,5 @@ deliverables/*.pdf
 media-source/products/*
 !media-source/products/README.md
 outputs/
+__pycache__/
 .DS_Store

@@ -6,4 +6,9 @@ export default defineConfig({
   output: "static",
   integrations: [sitemap()],
   build: { assets: "_assets" },
+  vite: {
+    build: {
+      sourcemap: false,
+    },
+  },
 });
