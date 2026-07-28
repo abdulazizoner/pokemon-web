@@ -4,22 +4,33 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build",
+    "build": "pnpm content:validate && astro check && astro build && pnpm links:check",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "eslint .",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e:desktop": "playwright test --project=desktop",
+    "test:e2e:mobile": "playwright test --project=mobile",
+    "card:new": "node scripts/card-new.mjs",
+    "content:validate": "node scripts/validate-content.mjs",
+    "media:optimize": "node scripts/optimize-media.mjs",
+    "media:check": "node scripts/optimize-media.mjs --check",
+    "links:check": "node scripts/check-links.mjs",
+    "shopier:check": "node scripts/check-shopier-links.mjs",
+    "visual:capture": "playwright test --config=playwright.visual.config.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
     "astro": "^5.13.0",
+    "gray-matter": "^4.0.3",
     "sharp": "^0.34.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "@axe-core/playwright": "^4.10.2",
     "@eslint/js": "^9.34.0",
     "@playwright/test": "^1.55.0",
     "@types/node": "^24.3.0",
@@ -32,5 +43,5 @@
     "typescript-eslint": "^8.41.0",
     "vitest": "^3.2.4"
   },
-  "packageManager": "pnpm@10.15.0"
+  "packageManager": "pnpm@11.9.0"
 }

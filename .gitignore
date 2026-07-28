@@ -4,4 +4,10 @@ dist/
 .env
 playwright-report/
 test-results/
+artifacts/
+work/
+deliverables/*.pdf
+media-source/products/*
+!media-source/products/README.md
+outputs/
 .DS_Store
