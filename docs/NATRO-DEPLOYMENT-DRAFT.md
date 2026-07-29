@@ -17,6 +17,8 @@
 $env:PUBLIC_SITE_URL = "https://ornek-domain.example"
 pnpm install --frozen-lockfile
 pnpm build
+pnpm assets:check
+pnpm links:check
 ```
 
 Yüklenecek öğe `dist/` klasörünün **içeriğidir**. Node.js production runtime gerekmez.
@@ -84,6 +86,7 @@ HTTPS doğrulandıktan sonra uygun süreli HSTS değerlendirilebilir. Yanlış H
 - bilinmeyen URL → özel 404
 - `/robots.txt`
 - `/sitemap-index.xml`
+- `/favicon.svg`
 - Shopier CTA → yalnız `https://www.shopier.com/`
 
 ## Rollback

@@ -15,6 +15,9 @@ Vitest:
 - Shopier HTTPS/allowlist doğrulaması
 - tekrar eden ID/slug/URL tespiti
 - placeholder, draft, sold ve available davranışları
+- belgelenen `card:new --slug` sözleşmesi ve üzerine yazma koruması
+- front/back/detail medya türevlerinin gerçek geçici dosyalarla üretimi
+- bozuk medya kaynağının açık hatayla reddedilmesi
 
 ### Build-time doğrulama
 
@@ -33,6 +36,12 @@ Vitest:
 - ön/arka çifti
 - desteklenen ve okunabilir kaynaklar
 - gereksiz upscaling olmadan üretim planı
+
+`pnpm assets:check`:
+
+- `dist/` içinde yalnız izinli statik dosyalar
+- okunabilir görseller ve geçerli boyutlar
+- büyük dosya, source map ve kaynak kod sızıntısı reddi
 
 ### Tarayıcı E2E
 
@@ -60,19 +69,22 @@ Playwright masaüstü ve mobil projelerinde:
 - buton adları
 - focus-visible
 - mobil menü davranışı
+- 320 px, tablet, 1920 px ve %200 yakınlaştırma yeniden-akış eşdeğeri
 - reduced-motion
 
 kontrollerini kapsar. Görsel QA sırasında taşma, kontrast, uzun metin ve küçük ekran davranışı elle incelenir.
 
 ### Görsel doğrulama
 
-`pnpm visual:capture` sekiz ekran üretir:
+`pnpm visual:capture` 15 ekran üretir:
 
-- homepage desktop/mobile
-- catalog desktop/mobile
-- product detail desktop/mobile
-- empty filter
-- sold product
+- ana sayfa: 1440, 390, 320 ve 1920 px
+- katalog: 1440, 390 ve 768 px
+- ürün detayı: 1440, 390 ve %200 yakınlaştırma yeniden-akış eşdeğeri
+- açık mobil navigasyon
+- birleşik filtre ve boş filtre
+- satılmış ürün
+- 404
 
 Görüntüler `artifacts/visual-qa/` altındadır ve kalıcı ürün içeriği değildir.
 
@@ -87,6 +99,8 @@ pnpm test
 pnpm content:validate
 pnpm media:check
 pnpm build
+pnpm assets:check
+pnpm links:check
 pnpm test:e2e:desktop
 pnpm test:e2e:mobile
 pnpm visual:capture
@@ -105,4 +119,4 @@ pnpm visual:capture
 - axe kritik/ciddi ihlal bildirmez
 - draft/hidden içerik build’de sayfa oluşturmaz
 - placeholder/sold içerikte aktif Shopier CTA yoktur
-- preview ve browser süreçleri test sonunda kapanır
+- otomatik testlerin geçici preview süreçleri test sonunda kapanır; manuel kabul için `pnpm local:test` ayrıca başlatılır

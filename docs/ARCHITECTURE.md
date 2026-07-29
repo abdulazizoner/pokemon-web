@@ -2,7 +2,7 @@
 
 ## Nihai karar
 
-Proje, Astro ve strict TypeScript ile derlenen tamamen statik bir ürün vitrinidir. Natro paylaşımlı hosting yalnız `dist/` içindeki HTML, CSS, istemci JavaScript’i ve görselleri sunar.
+Proje, Astro 7 ve strict TypeScript ile derlenen tamamen statik bir ürün vitrinidir. Natro paylaşımlı hosting yalnız `dist/` içindeki HTML, CSS, istemci JavaScript’i ve görselleri sunar.
 
 Satışın doğruluk kaynağı Shopier’dir:
 
@@ -19,6 +19,7 @@ Satışın doğruluk kaynağı Shopier’dir:
 - Analitik, izleme çerezi ve veri toplayan form varsayılan olarak yoktur.
 - Shopier API’sine veya belgelenmemiş URL yapısına bağımlılık yoktur.
 - Production çıktısında source map üretilmez.
+- `pnpm assets:check`, `dist/` içindeki görselleri gerçek dosya imzası ve boyutlarıyla denetler; kaynak veya geliştirme dosyalarının sızmasını reddeder.
 
 ## Katmanlar
 
@@ -53,6 +54,8 @@ dist/ ──► Natro paylaşımlı hosting
 - `draft`: statik sayfa üretilmez ve katalogda görünmez.
 - `hidden`: statik sayfa üretilmez ve katalogda görünmez.
 - `isPlaceholder: true`: görünür biçimde “Temsili” işaretlenir ve aktif satın alma CTA’sı hiçbir durumda oluşturulmaz.
+
+Astro içerik şeması `src/content.config.ts` içindedir. `src/lib/cards.ts`, Content Collection çıktısını bu şemadan türetilen `CardData` tipine bağlayan tek erişim sınırıdır; sayfalar koleksiyonu doğrudan ve tipsiz biçimde tüketmez.
 
 ## Yerel medya
 

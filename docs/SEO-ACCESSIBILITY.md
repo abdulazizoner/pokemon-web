@@ -30,6 +30,8 @@ Build’den sonra canonical, sitemap ve robots içindeki URL’ler kontrol edilm
 - görünür `:focus-visible`
 - tüm filtrelerde ilişkili label
 - klavyeyle açılan mobil navigasyon
+- mobil menüde Escape ile kapatma ve odağı menü düğmesine geri verme
+- aktif sayfada `aria-current="page"`
 - hover gerektirmeyen ön/arka görsel kontrolü
 - `aria-pressed` ile yüz durumu
 - JavaScript kapalıyken iki yüzün de görünmesi
@@ -41,7 +43,7 @@ Build’den sonra canonical, sitemap ve robots içindeki URL’ler kontrol edilm
 
 - axe otomasyonu ana sayfa, katalog ve ürün detayında E2E içinde çalışır
 - desktop ve mobile klavye senaryoları
-- 390 px mobil, tablet ve geniş masaüstü görsel QA
+- 320/390 px mobil, tablet, 1440/1920 px masaüstü ve %200 yeniden-akış eşdeğeri görsel QA
 - uzun Türkçe başlık ve kondisyon notu kontrolleri
 
 ## Gizlilik
@@ -62,6 +64,16 @@ Build’den sonra canonical, sitemap ve robots içindeki URL’ler kontrol edilm
 - Natro için CSP, nosniff, referrer ve permissions başlıkları deployment taslağında
 - `.env`, kaynak kod ve test çıktıları hosting’e yüklenmez
 
-## Bilinen sınır
+## Son yerel Lighthouse denetimi
 
-Lighthouse CLI bu çalışma ortamında zorunlu bir araç olarak bulunmamaktadır. Performans; statik build, yerel fontlar, görüntü ölçüleri, sınırlı istemci JavaScript’i, Playwright tarayıcı kontrolleri ve build çıktı envanteriyle doğrulanır. WP-09 canlı domain açıldığında Lighthouse/CrUX benzeri ağ koşullu ölçüm tekrarlanmalıdır.
+29 Temmuz 2026’da Lighthouse 12.8.2 mobil profili, production preview üzerinde çalıştırıldı:
+
+| Sayfa       | Performance | Accessibility | Best Practices | SEO |    LCP | CLS |
+| ----------- | ----------: | ------------: | -------------: | --: | -----: | --: |
+| Ana sayfa   |         100 |           100 |            100 | 100 | 1.3 sn |   0 |
+| Katalog     |         100 |           100 |            100 | 100 | 0.8 sn |   0 |
+| Ürün detayı |         100 |           100 |            100 | 100 | 1.3 sn |   0 |
+
+Bu değerler localhost laboratuvar ölçümüdür; Natro ağı ve gerçek kullanıcı koşullarını temsil etmez. WP-09’da canlı domain açıldığında mobil Lighthouse ve mümkünse gerçek kullanıcı verisiyle yeniden ölçüm yapılmalıdır.
+
+Son tekrarın üç JSON raporu eksiksiz ve `runtimeError` olmadan üretildi. Windows, raporlar yazıldıktan sonra Lighthouse geçici Chrome profilini silerken `EPERM` temizlik uyarısı verdi; bu uyarı ölçümü veya site çalışmasını etkilemedi.

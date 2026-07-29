@@ -18,6 +18,8 @@ Son güncelleme: 29 Temmuz 2026
 
 ## Tamamlanan paketlerin kanıtı
 
+WP-04–WP-08 için “tamamlandı” ifadesi yerel statik frontend kapsamını anlatır. Son yerel audit, production build, 11 unit test, 12 masaüstü E2E, 12 mobil E2E, axe kontrolleri, 15 görsel senaryo ve üç sayfalık Lighthouse ölçümüyle doğrulanmıştır. Canlı Natro dağıtımı, gerçek Shopier eşleştirmesi ve paydaş kabulü bu statüye dahil değildir.
+
 ### WP-04
 
 - “Koleksiyon Arşivi” UX/UI yönü

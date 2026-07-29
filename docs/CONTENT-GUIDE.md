@@ -96,7 +96,9 @@ gerektirir.
    pnpm media:optimize --slug <slug>
    ```
 
-4. Üretilen public yollarını Markdown kaydına yazın.
+   Komut `front`, `back` ve varsa sıralı `detail-01`, `detail-02` kaynaklarını işler; 480/800/1200 genişliklerini yalnız kaynak yeterince büyükse üretir ve küçük görselleri büyütmez.
+
+4. Üretilen canonical `front.webp`, `back.webp` ve gerekiyorsa `detail-N.webp` public yollarını Markdown kaydına yazın.
 5. Alt metinleri “ön yüz görseli” gibi boş/genel ifadeler yerine ürünü tanımlayacak biçimde yazın.
 6. İçerik ve build doğrulamasını çalıştırın.
 
@@ -137,12 +139,13 @@ Bu iki durum katalogdan ve statik ürün sayfası üretiminden çıkarılır.
 ```bash
 pnpm content:validate
 pnpm media:check
+pnpm assets:check
 pnpm links:check
 pnpm shopier:check
 pnpm build
 ```
 
-`shopier:check`, kayıtlı gerçek URL varsa isteğe bağlı ağ kontrolü yapar. Ağ erişimi ve üçüncü taraf sürekliliği build’in temel koşulu değildir.
+`media:check`, kaynak dosyaların bozuk olup olmadığını Sharp ile okumayı da dener. `assets:check`, derlenmiş `dist/` içindeki tüm görsellerin okunabilirliğini ve istenmeyen dosya türlerini denetler. `shopier:check`, kayıtlı gerçek URL varsa isteğe bağlı ağ kontrolü yapar. Ağ erişimi ve üçüncü taraf sürekliliği build’in temel koşulu değildir.
 
 ## Yaygın doğrulama hataları
 

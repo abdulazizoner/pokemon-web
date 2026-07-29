@@ -1,4 +1,4 @@
-# Paralel Arşiv — statik koleksiyon kartı vitrini
+# Pokémon Web — statik koleksiyon kartı vitrini
 
 Natro paylaşımlı hosting için statik olarak derlenen, ürünleri tanıtan ve satışa açık gerçek kayıtları Shopier ürün sayfalarına yönlendiren Astro sitesi.
 
@@ -20,7 +20,7 @@ Backend, veritabanı, üyelik, sepet, ödeme, CMS ve production Node.js runtime 
 
 ## Gereksinimler
 
-- Node.js 24 LTS/uyumlu sürüm
+- Node.js 22.12 veya üzeri (son yerel denetim: 24.11.1)
 - pnpm (repository’deki `packageManager` sürümü)
 
 ## Kurulum
@@ -34,6 +34,15 @@ pnpm install --frozen-lockfile
 ```bash
 pnpm dev
 ```
+
+Production çıktısını yerel kabul testi için çalıştırmak:
+
+```bash
+pnpm build
+pnpm local:test
+```
+
+Yerel adres: `http://127.0.0.1:4321/`.
 
 ## Ürün operasyonu
 
@@ -56,10 +65,13 @@ pnpm check
 pnpm test
 pnpm content:validate
 pnpm media:check
+pnpm assets:check
+pnpm links:check
 pnpm build
 pnpm test:e2e:desktop
 pnpm test:e2e:mobile
 pnpm visual:capture
+pnpm audit --audit-level moderate
 ```
 
 ## Production build
@@ -75,6 +87,7 @@ Natro’ya yüklenecek dosyalar `dist/` içindedir. Natro dağıtımı WP-09 aç
 
 - `src/config/store.ts`: merkezî marka, iletişim ve site URL’si
 - `src/content.config.ts`: Astro ürün şeması
+- `src/lib/cards.ts`: Astro koleksiyon verisini şema tipine bağlayan tek erişim noktası
 - `src/lib/product-policy.ts`: görünürlük ve CTA politikası
 - `src/content/cards/`: ürün kayıtları
 - `media-source/products/`: Git dışı gerçek kaynak fotoğraf alanı
@@ -82,9 +95,10 @@ Natro’ya yüklenecek dosyalar `dist/` içindedir. Natro dağıtımı WP-09 aç
 - `docs/TESTING-STRATEGY.md`: doğrulama kapsamı
 - `docs/SEO-ACCESSIBILITY.md`: SEO, erişilebilirlik ve güvenlik
 - `docs/NATRO-DEPLOYMENT-DRAFT.md`: askıdaki canlı dağıtım hazırlığı
+- `docs/FINAL-LOCAL-AUDIT.md`: son yerel ürün denetimi ve doğrulama özeti
 - `docs/shopier-sirket-hesabi-ve-operasyon-rehberi.md`: Shopier ana rehberi
 - `deliverables/`: Word rehberi ve askıdaki paketler raporu
 
 ## Work package durumu
 
-WP-04, WP-05, WP-06, WP-07 ve WP-08 tamamlanmıştır. Şirket/hesap/gerçek içerik bağımlı WP-01, WP-02, WP-03, WP-09 ve WP-10 askıdadır. Ayrıntılar `docs/WORK-PACKAGES.md` ve `deliverables/ASKIYA_ALINAN_WORK_PACKAGES.txt` içindedir.
+WP-04, WP-05, WP-06, WP-07 ve WP-08 yerel olarak tamamlanmış ve son regresyonda doğrulanmıştır. Şirket/hesap/gerçek içerik bağımlı WP-01, WP-02, WP-03, WP-09 ve WP-10 askıdadır. Bu nedenle proje canlıda veya nihai kabul edilmiş sayılmaz; mevcut durum yerel kabul testine hazır statik frontend’dir. Ayrıntılar `docs/WORK-PACKAGES.md` ve `deliverables/ASKIYA_ALINAN_WORK_PACKAGES.txt` içindedir.
