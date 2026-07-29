@@ -17,7 +17,13 @@ import { store } from "../config/store";
     <div class="contact-grid">
       <div>
         <p class="overline">E-posta</p>
-        <a href={`mailto:${store.email}`}>{store.email}</a>
+        {
+          store.isPlaceholderBrand ? (
+            <p class="contact-value">{store.email}</p>
+          ) : (
+            <a href={`mailto:${store.email}`}>{store.email}</a>
+          )
+        }
         <small>Geçici iletişim adresi</small>
       </div>
       <div>

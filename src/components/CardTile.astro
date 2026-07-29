@@ -1,10 +1,13 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import type { CardEntry } from "../lib/cards";
 import { availabilityLabels } from "../lib/product-policy";
-const { card } = Astro.props as { card: CollectionEntry<"cards"> };
+const { card } = Astro.props as { card: CardEntry };
 const d = card.data;
 const detailUrl = `/kartlar/${d.slug}`;
 const availability = availabilityLabels[d.availability];
+const priceLabel = d.isPlaceholder
+  ? "Fiyat daha sonra"
+  : (d.displayPrice ?? (d.availability === "sold" ? "Satıldı" : "Fiyat yakında"));
 ---
 
 <article
@@ -52,9 +55,7 @@ const availability = availabilityLabels[d.availability];
     <h3><a href={detailUrl}>{d.name}</a></h3>
     <div class="tag-row"><span>{d.condition}</span><span>{d.language}</span></div>
     <div class="price-row">
-      <strong>{d.displayPrice ?? "Fiyat yakında"}</strong><a href={detailUrl}
-        >İncele <span aria-hidden="true">↗</span></a
-      >
+      <strong>{priceLabel}</strong><a href={detailUrl}>İncele <span aria-hidden="true">↗</span></a>
     </div>
   </div>
 </article>

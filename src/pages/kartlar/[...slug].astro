@@ -1,21 +1,22 @@
 ---
-import { getCollection, render, type CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CardTile from "../../components/CardTile.astro";
+import { getCards, type CardEntry } from "../../lib/cards";
 import { availabilityLabels, canPurchase, isPublicProduct } from "../../lib/product-policy";
 import { store } from "../../config/store";
 
 export async function getStaticPaths() {
-  const cards = await getCollection("cards");
+  const cards = await getCards();
   return cards
     .filter((card) => isPublicProduct(card.data))
     .map((card) => ({ params: { slug: card.data.slug }, props: { card } }));
 }
 
-const { card } = Astro.props as { card: CollectionEntry<"cards"> };
+const { card } = Astro.props as { card: CardEntry };
 const { Content } = await render(card);
 const d = card.data;
-const allCards = (await getCollection("cards")).filter(
+const allCards = (await getCards()).filter(
   (item) => isPublicProduct(item.data) && item.data.slug !== d.slug,
 );
 const related = allCards
@@ -26,6 +27,9 @@ const related = allCards
   })
   .slice(0, 3);
 const purchaseEnabled = canPurchase(d);
+const priceLabel = d.isPlaceholder
+  ? "Fiyat daha sonra"
+  : (d.displayPrice ?? (d.availability === "sold" ? "Satıldı" : "Fiyat yakında"));
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -85,7 +89,7 @@ const breadcrumbJsonLd = {
         >
         {d.isPlaceholder && <span class="placeholder-inline">Temsili içerik</span>}
       </div>
-      <p class="product-price">{d.displayPrice ?? "Fiyat yakında"}</p>
+      <p class="product-price">{priceLabel}</p>
       <p class="product-description">{d.description}</p>
       <dl>
         <div><dt>Set</dt><dd>{d.setName}{d.setCode ? ` (${d.setCode})` : ""}</dd></div>
@@ -144,14 +148,16 @@ const breadcrumbJsonLd = {
       </section>
     )
   }
-  <script>
-    const gallery = document.querySelector<HTMLElement>("[data-detail-gallery]");
+  <script is:inline>
+    const gallery = document.querySelector("[data-detail-gallery]");
     if (gallery) {
       gallery.classList.add("is-enhanced");
-      const figures = gallery.querySelectorAll<HTMLElement>("[data-face]");
-      const buttons = gallery.querySelectorAll<HTMLButtonElement>("[data-show-face]");
-      const selectFace = (face: string) => {
-        figures.forEach((figure) => (figure.hidden = figure.dataset.face !== face));
+      const figures = gallery.querySelectorAll("[data-face]");
+      const buttons = gallery.querySelectorAll("[data-show-face]");
+      const selectFace = (face) => {
+        figures.forEach((figure) => {
+          if (figure instanceof HTMLElement) figure.hidden = figure.dataset.face !== face;
+        });
         buttons.forEach((button) =>
           button.setAttribute("aria-pressed", String(button.dataset.showFace === face)),
         );

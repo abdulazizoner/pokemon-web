@@ -1,10 +1,10 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CardTile from "../components/CardTile.astro";
+import { getCards } from "../lib/cards";
 import { isPublicProduct } from "../lib/product-policy";
 import { store } from "../config/store";
-const cards = (await getCollection("cards"))
+const cards = (await getCards())
   .filter((card) => isPublicProduct(card.data))
   .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 const featured = cards.filter((card) => card.data.featured).slice(0, 3);
@@ -57,7 +57,7 @@ const jsonLd = {
 
   <section class="ticker" aria-label="Mağaza özellikleri">
     <div>
-      TEKİL KARTLAR <i>✦</i> GERÇEK FOTOĞRAFLAR <i>✦</i> AÇIK KONDİSYON <i>✦</i> GÜVENLİ ÖDEME <i
+      TEKİL KARTLAR <i>✦</i> GERÇEK FOTOĞRAFLAR <i>✦</i> AÇIK KONDİSYON <i>✦</i> SHOPIER’DE ÖDEME <i
         >✦</i
       > ÖZENLİ PAKETLEME
     </div>
@@ -94,7 +94,7 @@ const jsonLd = {
       </li>
       <li>
         <span>03</span><div>
-          <h3>Güvenle tamamla</h3><p>
+          <h3>Shopier’de tamamla</h3><p>
             Ödeme ve sipariş işlemlerini Shopier altyapısı üzerinden tamamla.
           </p>
         </div>

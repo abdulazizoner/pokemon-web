@@ -31,6 +31,7 @@ a {
 img {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 button,
 input,
@@ -126,11 +127,22 @@ select {
 .site-header nav a:hover {
   color: var(--ink);
 }
+.site-header nav a[aria-current="page"] {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.3em;
+}
 .mobile-nav {
   display: none;
   position: relative;
 }
 .mobile-nav summary {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   font-weight: 700;
   list-style: none;
@@ -149,6 +161,11 @@ select {
   padding: 1rem;
   display: grid;
   gap: 0.8rem;
+}
+.mobile-nav nav a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 .button {
   display: inline-flex;
@@ -822,9 +839,13 @@ dd {
   border-radius: var(--radius);
   padding: 1.5rem;
 }
-.contact-grid a {
+.contact-grid a,
+.contact-value {
   font: 400 1.8rem var(--serif);
   overflow-wrap: anywhere;
+}
+.contact-value {
+  margin: 0;
 }
 .contact-grid small {
   display: block;
@@ -955,7 +976,7 @@ dd {
     right: -2%;
   }
   .hero h1 {
-    font-size: clamp(3.2rem, 15vw, 4.1rem);
+    font-size: clamp(2.7rem, 13vw, 4rem);
   }
   .hero-actions {
     align-items: flex-start;
@@ -1009,7 +1030,8 @@ dd {
   .mobile-nav nav {
     right: -0.5rem;
   }
-  .contact-grid a {
+  .contact-grid a,
+  .contact-value {
     font-size: 1.4rem;
   }
 }

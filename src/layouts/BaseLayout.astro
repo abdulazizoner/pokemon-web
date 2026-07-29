@@ -19,14 +19,24 @@ const {
 const canonical = new URL(Astro.url.pathname, store.siteUrl);
 const socialImage = new URL("/og.png", store.siteUrl);
 const fullTitle = title === store.name ? title : `${title} — ${store.name}`;
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const navigationItems = [
+  { href: "/kartlar", label: "Kartlar" },
+  { href: "/hakkimizda", label: "Hakkımızda" },
+  { href: "/sss", label: "SSS" },
+  { href: "/iletisim", label: "İletişim" },
+];
+const isCurrent = (href: string) =>
+  currentPath === href || (href !== "/" && currentPath.startsWith(`${href}/`));
 ---
 
 <!doctype html>
 <html lang="tr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
     <meta property="og:type" content={ogType} />
@@ -54,24 +64,33 @@ const fullTitle = title === store.name ? title : `${title} — ${store.name}`;
       )
     }
     <header class="site-header">
-      <a class="brand" href="/" aria-label={`${store.name} ana sayfa`}>
+      <a class="brand" href="/" aria-current={currentPath === "/" ? "page" : undefined}>
         <span class="brand-mark" aria-hidden="true">P/A</span>
         <span>{store.name}</span>
+        <span class="sr-only"> ana sayfa</span>
       </a>
       <nav aria-label="Ana menü">
-        <a href="/kartlar">Kartlar</a>
-        <a href="/hakkimizda">Hakkımızda</a>
-        <a href="/sss">SSS</a>
-        <a href="/iletisim">İletişim</a>
+        {
+          navigationItems.map((item) => (
+            <a href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>
+              {item.label}
+            </a>
+          ))
+        }
       </nav>
       <details class="mobile-nav">
-        <summary>Menü</summary>
-        <nav aria-label="Mobil menü">
-          <a href="/kartlar">Kartlar</a>
-          <a href="/hakkimizda">Hakkımızda</a>
-          <a href="/sss">SSS</a>
+        <summary aria-controls="mobil-menu-baglantilari">Menü</summary>
+        <nav id="mobil-menu-baglantilari" aria-label="Mobil menü">
+          {
+            navigationItems.slice(0, 3).map((item) => (
+              <a href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
           <a href="/kargo-ve-iade">Kargo ve iade</a>
-          <a href="/iletisim">İletişim</a>
+          <a href="/iletisim" aria-current={isCurrent("/iletisim") ? "page" : undefined}>İletişim</a
+          >
         </nav>
       </details>
       <a class="button button-compact" href="/kartlar">Arşivi keşfet</a>
@@ -96,6 +115,18 @@ const fullTitle = title === store.name ? title : `${title} — ${store.name}`;
             ? "Önü göster"
             : "Arkayı göster";
         });
+      });
+
+      const mobileNav = document.querySelector<HTMLDetailsElement>(".mobile-nav");
+      const mobileSummary = mobileNav?.querySelector<HTMLElement>("summary");
+      mobileNav?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => mobileNav.removeAttribute("open"));
+      });
+      mobileNav?.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && mobileNav.open) {
+          mobileNav.removeAttribute("open");
+          mobileSummary?.focus();
+        }
       });
     </script>
   </body>
