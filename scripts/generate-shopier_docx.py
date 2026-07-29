@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "docs" / "shopier-sirket-hesabi-ve-operasyon-rehberi.md"
 OUTPUT = (
     ROOT
-    / "deliverables"
-    / "Shopier_Sirket_Hesabi_Acilis_Urun_Listeleme_ve_Operasyon_Rehberi.docx"
+    / "required_fields"
+    / "shopier_account.docx"
 )
 
 NAVY = "203748"
@@ -391,7 +391,9 @@ def setup_styles(doc: Document):
 
 
 def setup_sections(doc: Document):
-    for section in doc.sections:
+    doc.settings.odd_and_even_pages_header_footer = True
+
+    for section_index, section in enumerate(doc.sections):
         section.page_width = Inches(8.5)
         section.page_height = Inches(11)
         section.top_margin = Inches(1)
@@ -400,28 +402,38 @@ def setup_sections(doc: Document):
         section.left_margin = Inches(1)
         section.header_distance = Inches(0.492)
         section.footer_distance = Inches(0.492)
+        section.different_first_page_header_footer = False
 
-        header = section.header
-        header.is_linked_to_previous = False
-        p = header.paragraphs[0]
-        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.space_after = Pt(0)
-        left = p.add_run("PARALEL ARŞİV")
-        set_run_font(left, size=8.5, color=NAVY, bold=True)
-        right = p.add_run("    |    SHOPIER OPERASYON REHBERİ")
-        set_run_font(right, size=8.5, color=MUTED)
-        add_bottom_border(p, color=LINE, size=6)
+        header_variants = (section.header, section.even_page_header)
+        footer_variants = (section.footer, section.even_page_footer)
 
-        footer = section.footer
-        footer.is_linked_to_previous = False
-        fp = footer.paragraphs[0]
-        fp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        fp.paragraph_format.space_before = Pt(0)
-        label = fp.add_run("Sayfa ")
-        set_run_font(label, size=8.5, color=MUTED)
-        field_run = fp.add_run()
-        set_run_font(field_run, size=8.5, color=MUTED)
-        add_field(field_run, "PAGE", "1")
+        for header in header_variants:
+            header.is_linked_to_previous = False
+            p = header.paragraphs[0]
+            p.clear()
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+            p.paragraph_format.space_after = Pt(0)
+            if section_index == 0:
+                continue
+            left = p.add_run("PROJE DOKÜMANI")
+            set_run_font(left, size=8.5, color=NAVY, bold=True)
+            right = p.add_run("    |    SHOPIER OPERASYON REHBERİ")
+            set_run_font(right, size=8.5, color=MUTED)
+            add_bottom_border(p, color=LINE, size=6)
+
+        for footer in footer_variants:
+            footer.is_linked_to_previous = False
+            fp = footer.paragraphs[0]
+            fp.clear()
+            fp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+            fp.paragraph_format.space_before = Pt(0)
+            if section_index == 0:
+                continue
+            label = fp.add_run("Sayfa ")
+            set_run_font(label, size=8.5, color=MUTED)
+            field_run = fp.add_run()
+            set_run_font(field_run, size=8.5, color=MUTED)
+            add_field(field_run, "PAGE", "1")
 
 
 def add_cover(doc: Document):
@@ -466,7 +478,7 @@ def add_cover(doc: Document):
     meta = doc.add_paragraph()
     meta.alignment = WD_ALIGN_PARAGRAPH.CENTER
     meta.paragraph_format.space_after = Pt(4)
-    run = meta.add_run("Belge sürümü 1.0  •  29 Temmuz 2026")
+    run = meta.add_run("Belge sürümü 1.1  •  30 Temmuz 2026")
     set_run_font(run, size=11, color=NAVY, bold=True)
 
     scope = doc.add_paragraph()
@@ -489,7 +501,7 @@ def add_cover(doc: Document):
     run = note.add_run("ŞİRKET BİLGİLERİ VE HESAP ERİŞİMİ GELMEDEN UYGULANMAMALIDIR")
     set_run_font(run, size=8.5, color=GOLD, bold=True)
 
-    doc.add_page_break()
+    doc.add_section(WD_SECTION.NEW_PAGE)
 
 
 def add_callout(doc: Document, lines: list[str]):
@@ -674,11 +686,11 @@ def add_intro_and_toc(doc: Document, lines: list[str]):
     run = toc_heading.add_run("3. İçindekiler")
     set_run_font(run, size=18, color=BLUE, bold=True)
     toc_pages = {
-        1: 2, 2: 2, 3: 3, 4: 4, 5: 4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 8,
-        11: 9, 12: 10, 13: 11, 14: 11, 15: 12, 16: 13, 17: 14, 18: 15,
-        19: 15, 20: 16, 21: 17, 22: 17, 23: 18, 24: 19, 25: 19, 26: 20,
-        27: 21, 28: 21, 29: 22, 30: 23, 31: 23, 32: 24, 33: 25, 34: 25,
-        35: 26, 36: 27, 37: 28, 38: 28,
+        1: 2, 2: 2, 3: 3, 4: 4, 5: 4, 6: 5, 7: 7, 8: 7, 9: 8, 10: 9,
+        11: 10, 12: 10, 13: 11, 14: 12, 15: 12, 16: 13, 17: 14, 18: 15,
+        19: 15, 20: 16, 21: 17, 22: 17, 23: 18, 24: 19, 25: 20, 26: 20,
+        27: 21, 28: 22, 29: 23, 30: 23, 31: 24, 32: 24, 33: 25, 34: 26,
+        35: 27, 36: 28, 37: 28, 38: 29,
     }
     entries = []
     for line in lines:
@@ -705,9 +717,9 @@ def set_document_properties(doc: Document):
     props = doc.core_properties
     props.title = "Şirketler İçin Shopier Hesabı Açılışı, Ürün Listeleme ve Operasyon Rehberi"
     props.subject = "Shopier ticari hesap, ürün, kargo, sipariş ve teslim operasyon rehberi"
-    props.author = "Paralel Arşiv proje ekibi"
+    props.author = "Proje ekibi"
     props.keywords = "Shopier, şirket hesabı, koleksiyon kartları, ürün listeleme, kargo, iade"
-    props.comments = "Son doğrulama: 29 Temmuz 2026. Şirket bilgileri geçici olarak beklenmektedir."
+    props.comments = "Son doğrulama: 30 Temmuz 2026. Şirket bilgileri geçici olarak beklenmektedir."
 
     settings = doc.settings._element
     update = settings.find(qn("w:updateFields"))
@@ -718,18 +730,24 @@ def set_document_properties(doc: Document):
 
 
 def audit_document(doc: Document):
-    section = doc.sections[0]
-    assert round(section.page_width.inches, 3) == 8.5
-    assert round(section.page_height.inches, 3) == 11
-    for margin in (
-        section.top_margin,
-        section.right_margin,
-        section.bottom_margin,
-        section.left_margin,
-    ):
-        assert round(margin.inches, 3) == 1.0
-    assert round(section.header_distance.inches, 3) == 0.492
-    assert round(section.footer_distance.inches, 3) == 0.492
+    assert len(doc.sections) == 2
+    for section in doc.sections:
+        assert round(section.page_width.inches, 3) == 8.5
+        assert round(section.page_height.inches, 3) == 11
+        for margin in (
+            section.top_margin,
+            section.right_margin,
+            section.bottom_margin,
+            section.left_margin,
+        ):
+            assert round(margin.inches, 3) == 1.0
+        assert round(section.header_distance.inches, 3) == 0.492
+        assert round(section.footer_distance.inches, 3) == 0.492
+
+    assert doc.sections[0].header.paragraphs[0].text == ""
+    assert doc.sections[0].footer.paragraphs[0].text == ""
+    assert "SHOPIER OPERASYON REHBERİ" in doc.sections[1].header.paragraphs[0].text
+    assert doc.sections[1].footer.paragraphs[0].text.startswith("Sayfa ")
 
     normal = doc.styles["Normal"]
     assert normal.font.name == "Calibri"
@@ -752,11 +770,11 @@ def main():
 
     doc = Document()
     setup_styles(doc)
-    setup_sections(doc)
     set_document_properties(doc)
     add_cover(doc)
     add_intro_and_toc(doc, lines)
     render_markdown(doc, lines[body_start:])
+    setup_sections(doc)
     audit_document(doc)
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)

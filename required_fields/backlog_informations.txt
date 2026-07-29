@@ -1,0 +1,533 @@
+CANLIYA GEÇİŞ İÇİN GEREKLİ BİLGİLER VE ONAY FORMU
+
+Belge sürümü : 2.0
+Tarih         : 30.07.2026
+Proje         : Statik koleksiyon kartı vitrini + Shopier satış yönlendirmesi
+Hosting       : Natro paylaşımlı hosting
+Durum         : Şirket bilgileri ve yetkili onayları bekleniyor
+
+==============================================================================
+1. BELGENİN AMACI
+==============================================================================
+
+Bu form, projenin gerçek şirket bilgileriyle tamamlanması, Shopier mağazasının
+satışa hazırlanması, Natro üzerinde yayınlanması ve nihai kabulünün alınması
+için şirketten, ürün sahibinden, mali müşavirden ve gerektiğinde hukukçudan
+alınması gereken bilgileri tek yerde toplar.
+
+Bu belge iş paketlerine ayrılmamıştır. Alanlar, bilgi ve onay türüne göre
+gruplanmıştır. Bilinmeyen alanlara tahminde bulunulmamalı; "Bekliyor" yazılmalı
+ve sorumlu kişi belirlenmelidir.
+
+Sabit kapsam:
+
+- Web sitesi yalnızca statik ürün vitrini olarak çalışır.
+- Sepet, ödeme, sipariş, tahsilat ve müşteri verileri Shopier'de yönetilir.
+- Natro'ya yalnız yerelde üretilen "dist/" klasörünün içeriği yüklenir.
+- Backend, veritabanı, üyelik, yerel sepet veya ödeme sistemi eklenmez.
+- Güncel fiyat, stok ve satış koşullarında Shopier esas kaynaktır.
+- Gerçek şirket, müşteri ve erişim bilgileri Git deposuna yazılmaz.
+
+==============================================================================
+2. ŞİRKET VE SHOPIER HESAP SAHİPLİĞİ
+==============================================================================
+
+2.1 Şirket bilgileri
+
+Resmî ticari unvan:
+..............................................................................
+
+Şirket türü (şahıs / limited / anonim):
+..............................................................................
+
+Vergi dairesi:
+..............................................................................
+
+Vergi kimlik numarası:
+..............................................................................
+
+MERSİS / ticaret sicil bilgisi:
+..............................................................................
+
+Şirket merkez adresi:
+..............................................................................
+
+Bilgiyi doğrulayan kişi ve tarih:
+..............................................................................
+
+2.2 Hesap sahipliği
+
+Shopier hesabını açacak yetkili:
+..............................................................................
+
+Yetkilinin şirketteki görevi:
+..............................................................................
+
+Şirket kontrolündeki kurumsal e-posta:
+..............................................................................
+
+Şirket kontrolündeki cep telefonu:
+..............................................................................
+
+Hesap kurtarma sorumlusu / yedek yetkili:
+..............................................................................
+
+Hesap sahipliği şirket içinde yazılı olarak onaylandı mı?
+[ ] Evet    [ ] Hayır    [ ] Bekliyor
+
+Onay kaydı / tarih:
+..............................................................................
+
+2.3 Banka hesabı
+
+Şirket adına kayıtlı TL IBAN hazır mı?
+[ ] Evet    [ ] Hayır    [ ] Bekliyor
+
+IBAN hesap sahibi unvanı Shopier şirket kaydıyla aynı mı?
+[ ] Evet    [ ] Hayır    [ ] Kontrol edilecek
+
+Tam IBAN bu belgeye yazılmamalıdır. Güvenli şirket kaydının referansı:
+..............................................................................
+
+2.4 Shopier kayıt ve aktivasyon kontrolü
+
+[ ] Resmî kayıt ekranındaki dükkan adı/linki dolduruldu
+[ ] Kurumsal e-posta ve şirket kontrollü telefon kullanıldı
+[ ] Üyelik türü ticari olarak seçildi
+[ ] Şirket türü ve resmî bilgiler doğru girildi
+[ ] Panelin güncel olarak istediği doğrulamalar tamamlandı
+[ ] Şirket adına kayıtlı banka hesabı tanımlandı
+[ ] Üyelik sözleşmeleri yetkili tarafından incelendi
+[ ] Hesap aktif edildi
+[ ] Mağaza bağlantısı kaydedildi
+[ ] Güncel işlem ücretleri panelden görüldü
+
+Shopier mağaza bağlantısı:
+..............................................................................
+
+Aktivasyon tarihi:
+..............................................................................
+
+Kontrol eden:
+..............................................................................
+
+==============================================================================
+3. GÜVENLİK VE ERİŞİM YÖNETİMİ
+==============================================================================
+
+[ ] Shopier için benzersiz ve güçlü parola belirlendi
+[ ] Parola şirketin onaylı parola yöneticisinde saklanıyor
+[ ] Shopier iki adımlı doğrulaması etkinleştirildi
+[ ] Kurumsal e-posta hesabında MFA etkin
+[ ] Telefon hattının şirket kontrolünde olduğu doğrulandı
+[ ] Kurtarma yöntemi ve yedek sorumlu belirlendi
+[ ] Çalışan ayrılışı / görev değişimi erişim prosedürü yazıldı
+[ ] Şüpheli erişimde uygulanacak olay müdahale adımları belirlendi
+[ ] Shopier ve Natro erişimleri yalnız yetkili kişilerde
+
+Erişim sahibi kişiler / roller:
+..............................................................................
+..............................................................................
+
+Erişim gözden geçirme tarihi:
+..............................................................................
+
+Bu belgeye veya Git deposuna ASLA eklenmeyecek bilgiler:
+
+- Shopier, Natro, e-posta veya banka parolaları
+- MFA QR kodları ve kurtarma kodları
+- T.C. kimlik numarası ve kimlik görüntüsü
+- Tam IBAN ve banka giriş bilgileri
+- Vergi levhası, imza sirküsü ve şirket belgelerinin ham kopyaları
+- Shopier/Natro erişim veya entegrasyon anahtarları
+- Gerçek müşteri adı, adresi, telefonu, sipariş ve ödeme bilgileri
+
+==============================================================================
+4. MALİ, HUKUKİ VE VERGİSEL TEYİTLER
+==============================================================================
+
+Mali müşavir:
+..............................................................................
+
+Mali müşavir teyit tarihi:
+..............................................................................
+
+Fatura / e-Belge yöntemi:
+..............................................................................
+
+Ürünlerin şirkete giriş ve alış belgesi yöntemi:
+..............................................................................
+
+Kartların satış niteliği (yeni / ikinci el / karışık):
+..............................................................................
+
+KDV ve varsa özel matrah değerlendirmesi:
+..............................................................................
+
+Shopier hizmet bedeli ve kargo kesintilerinin muhasebeleştirilmesi:
+..............................................................................
+
+İade belgesi ve muhasebe düzeltme yöntemi:
+..............................................................................
+
+Shopier tahsilatları ile banka mutabakat yöntemi:
+..............................................................................
+
+ETBİS değerlendirmesi:
+[ ] Uzman teyidi alındı
+[ ] Teyit bekliyor
+[ ] Yeniden değerlendirme gerekli
+
+ETBİS karar notu / tarih:
+..............................................................................
+
+Mesafeli satış, cayma ve iade metinleri:
+[ ] Hukukçu/mali müşavir tarafından incelendi
+[ ] İnceleme bekliyor
+
+KVKK ve müşteri verisi operasyonu:
+[ ] Yalnız Shopier panelinde yürütülecek şekilde tanımlandı
+[ ] Saklama ve silme sorumlusu belirlendi
+[ ] Teyit bekliyor
+
+Hukuk veya mali uzman notları:
+..............................................................................
+..............................................................................
+..............................................................................
+
+==============================================================================
+5. MAĞAZA, MARKA VE KAMUYA AÇIK İÇERİK
+==============================================================================
+
+Nihai mağaza adı:
+..............................................................................
+
+Nihai alan adı:
+..............................................................................
+
+Kısa slogan:
+..............................................................................
+
+Kurumsal destek e-postası:
+..............................................................................
+
+Kamuya açık telefon:
+..............................................................................
+
+Sosyal medya bağlantıları:
+..............................................................................
+..............................................................................
+
+Logo onayı:
+[ ] Nihai    [ ] Revizyon gerekli    [ ] Bekliyor
+
+Shopier geniş ekran banner onayı:
+[ ] Nihai    [ ] Revizyon gerekli    [ ] Bekliyor
+
+Shopier mobil banner onayı:
+[ ] Nihai    [ ] Revizyon gerekli    [ ] Bekliyor
+
+Favicon ve sosyal paylaşım görseli onayı:
+[ ] Nihai    [ ] Revizyon gerekli    [ ] Bekliyor
+
+Hakkımızda metni:
+[ ] Onaylandı    [ ] Revizyon gerekli    [ ] Bekliyor
+
+SSS metni:
+[ ] Onaylandı    [ ] Revizyon gerekli    [ ] Bekliyor
+
+Kargo ve iade bilgilendirmesi:
+[ ] Onaylandı    [ ] Uzman incelemesi bekliyor
+
+Pokémon ve diğer hak sahipleriyle resmî bağlantı bulunmadığı açıklaması:
+[ ] Onaylandı    [ ] Hukuk incelemesi bekliyor
+
+Marka/IP kullanım kontrolü:
+[ ] Resmî Pokémon logosu mağaza logosu olarak kullanılmıyor
+[ ] Resmî karakter ve tanıtım görselleri dekorasyon için kopyalanmıyor
+[ ] Alan adı ve mağaza adı resmî ortaklık izlenimi vermiyor
+[ ] "Resmî/yetkili satıcı" gibi kanıtlanamayan ifadeler kullanılmıyor
+[ ] Yalnız şirketin kullanım hakkına sahip olduğu görseller kullanılıyor
+
+Nihai içerik onayını veren kişi ve tarih:
+..............................................................................
+
+==============================================================================
+6. SHOPIER MAĞAZA VE OPERASYON KARARLARI
+==============================================================================
+
+Shopier kategori planı:
+..............................................................................
+..............................................................................
+
+Ürün adlandırma standardı onaylandı mı?
+[ ] Evet    [ ] Hayır    [ ] Revizyon gerekli
+
+Ürün açıklaması şablonu onaylandı mı?
+[ ] Evet    [ ] Hayır    [ ] Revizyon gerekli
+
+Kondisyon standardı:
+..............................................................................
+
+Kondisyonu onaylayacak kişi:
+..............................................................................
+
+Kargo politikası:
+[ ] Sepette ödeme
+[ ] Ücretsiz kargo
+[ ] Ürün bazında farklı
+[ ] Karar bekliyor
+
+Ücretsiz kargo eşiği varsa:
+..............................................................................
+
+Panelde görülen güncel anlaşmalı kargo firmaları:
+..............................................................................
+
+Panelde görülen güncel kargo ücretleri kontrol tarihi:
+..............................................................................
+
+Paketleme sorumlusu:
+..............................................................................
+
+Paketleme standardı onaylandı mı?
+[ ] Evet    [ ] Hayır    [ ] Revizyon gerekli
+
+Siparişlerin kontrol sıklığı:
+..............................................................................
+
+Kargoya teslim hedefi:
+..............................................................................
+
+İade talebi alınacak kalıcı kanal:
+..............................................................................
+
+İade karar sahibi:
+..............................................................................
+
+Günlük operasyon sorumlusu:
+..............................................................................
+
+3. taraf veya test müşterisi kullanılmadan önce:
+
+[ ] Kontrollü test ürünü oluşturuldu
+[ ] Ürün sayfası üyeliksiz/gizli pencerede açıldı
+[ ] Fiyat, stok, kargo ve görseller doğrulandı
+[ ] Kontrollü test siparişi planlandı
+[ ] Kargo kodu ve sipariş kapanışı denendi
+[ ] İade prosedürü masa başı senaryoyla doğrulandı
+[ ] Tahsilat ekranı ve mutabakat yöntemi anlaşıldı
+
+==============================================================================
+7. GERÇEK ÜRÜN BİLGİLERİ VE SHOPIER EŞLEŞTİRMESİ
+==============================================================================
+
+İlk yayına girecek ürün sayısı:
+..............................................................................
+
+Ürün listesini sağlayacak kişi:
+..............................................................................
+
+Gerçek ürün fotoğraflarını sağlayacak kişi:
+..............................................................................
+
+Kondisyon ve kusur notlarını onaylayacak kişi:
+..............................................................................
+
+Her gerçek ürün için zorunlu kontrol:
+
+[ ] Benzersiz iç ürün ID'si
+[ ] Kart adı
+[ ] Set adı
+[ ] Koleksiyon numarası
+[ ] Dil
+[ ] Nadirlik / baskı tipi
+[ ] Kondisyon derecesi
+[ ] Açık kondisyon ve kusur notu
+[ ] Gerçek fiziksel ürüne ait ön fotoğraf
+[ ] Gerçek fiziksel ürüne ait arka fotoğraf
+[ ] Gerekliyse kusur detay fotoğrafı
+[ ] Shopier satış fiyatı
+[ ] Shopier stok adedi
+[ ] Kargo tipi
+[ ] Tam "https://www.shopier.com/" ürün bağlantısı
+[ ] Statik site slug'ı
+[ ] Statik site ve Shopier kayıtlarının eşleşme onayı
+
+Eşleştirme tablosunun güvenli konumu:
+..............................................................................
+
+Fiyat ve stok mutabakatını yapacak kişi:
+..............................................................................
+
+Satılan ürünlerin statik sitedeki görünüm kararı:
+[ ] "Satıldı" etiketiyle arşivde kalsın
+[ ] Gizlensin
+[ ] Ürün bazında karar verilsin
+
+Temsili ürün ve görsellerin kaldırılması onaylandı mı?
+[ ] Evet    [ ] Hayır    [ ] Gerçek içerik bekleniyor
+
+Ön izleme bandının kaldırılma onayı:
+[ ] Verildi    [ ] Bekliyor
+
+==============================================================================
+8. NATRO ALAN ADI, HOSTING VE YAYIN BİLGİLERİ
+==============================================================================
+
+Natro hesap sahibi / şirket yetkilisi:
+..............................................................................
+
+Hosting paketi:
+..............................................................................
+
+Hosting türü:
+[ ] Linux / cPanel
+[ ] Windows / Plesk
+[ ] Henüz doğrulanmadı
+
+Nihai alan adı:
+..............................................................................
+
+Web kök dizini:
+..............................................................................
+
+Güvenli dosya aktarım yöntemi:
+[ ] SFTP
+[ ] FTPS
+[ ] Natro dosya yöneticisi
+[ ] Diğer: ...................................................................
+
+Canonical domain:
+[ ] Kök alan adı
+[ ] www
+[ ] Karar bekliyor
+
+DNS / name server kararı:
+..............................................................................
+
+SSL durumu:
+[ ] Etkin
+[ ] Talep edildi
+[ ] Bekliyor
+
+HTTP -> HTTPS yönlendirmesi:
+[ ] Doğrulandı
+[ ] Bekliyor
+
+Mevcut canlı site veya dosyalar var mı?
+[ ] Hayır
+[ ] Evet; yedek alınacak
+
+Yedek / rollback paketinin konumu:
+..............................................................................
+
+Canlıya çıkış tarihi ve bakım penceresi:
+..............................................................................
+
+Yayını yapacak teknik sorumlu:
+..............................................................................
+
+Yayın öncesi teknik kontrol:
+
+[ ] Temiz ortamda bağımlılıklar kuruldu
+[ ] Üretim build'i başarılı
+[ ] "dist/" içeriği kontrol edildi
+[ ] Kaynak dosyalar ve gizli bilgiler yayın paketinde yok
+[ ] Statik sayfalar ve 404 sayfası üretildi
+[ ] Shopier bağlantıları doğrulandı
+[ ] Mobil ve masaüstü görünüm kontrol edildi
+[ ] Eski web kökü yedeklendi
+
+Yayın sonrası kontrol:
+
+[ ] Alan adı açılıyor
+[ ] SSL geçerli
+[ ] HTTP, HTTPS'e yönleniyor
+[ ] Canonical domain doğru
+[ ] Ana sayfa açılıyor
+[ ] Katalog açılıyor
+[ ] Ürün detayları açılıyor
+[ ] Hakkımızda, SSS, iletişim ve kargo/iade sayfaları açılıyor
+[ ] 404 davranışı doğru
+[ ] Tüm Shopier yönlendirmeleri doğru ürünü açıyor
+[ ] Mobil ve masaüstü duman testi tamam
+[ ] Gerekirse geri dönüş prosedürü doğrulandı
+
+==============================================================================
+9. NİHAİ KABUL, DEVİR VE EĞİTİM
+==============================================================================
+
+Şirket kabul sorumlusu:
+..............................................................................
+
+Ürün sahibi / kondisyon sorumlusu:
+..............................................................................
+
+Teknik devir sorumlusu:
+..............................................................................
+
+Mali müşavir:
+..............................................................................
+
+Gerekirse hukukçu:
+..............................................................................
+
+Kabul kontrolü:
+
+[ ] Nihai marka, logo, alan adı ve iletişim bilgileri onaylandı
+[ ] Gerçek ürün içerikleri ürün sahibi tarafından onaylandı
+[ ] Her ürün doğru Shopier sayfasına yönleniyor
+[ ] Fiyat ve stok mutabakatı yapıldı
+[ ] Shopier hesap güvenliği tamamlandı
+[ ] Kargo, fatura ve iade prosedürleri yazılı
+[ ] Natro canlı yayın ve HTTPS doğrulandı
+[ ] Ürün ekleme rehberi teslim edildi
+[ ] Shopier operasyon rehberi teslim edildi
+[ ] Natro yayın rehberi teslim edildi
+[ ] Şirket yetkilisi ürün ekleme ve güncelleme akışını uyguladı
+[ ] Kaynak kod ve nihai statik paket teslim edildi
+[ ] Açık kritik hata kalmadı
+
+Kabul tarihi:
+..............................................................................
+
+Kabul eden kişi / imza veya yazılı onay referansı:
+..............................................................................
+
+Açık kalan konular:
+..............................................................................
+..............................................................................
+..............................................................................
+
+==============================================================================
+10. UYGULAMA SIRASI VE BAŞLAMA KOŞULU
+==============================================================================
+
+Bu formun uygulanması için önerilen sıra:
+
+1. Şirket ve hesap sahipliğini kesinleştirin.
+2. Mali/hukuki teyitleri ve şirket banka hesabını tamamlayın.
+3. Shopier ticari hesabını açın, etkinleştirin ve güvenliğini tamamlayın.
+4. Marka, kamuya açık iletişim ve mağaza içeriklerini onaylayın.
+5. Shopier mağaza, kargo, ürün ve günlük operasyon ayarlarını tamamlayın.
+6. Gerçek ürünleri Shopier'e girin ve statik site kayıtlarıyla eşleştirin.
+7. Natro alan adı, SSL ve yayın erişimlerini doğrulayın.
+8. Üretim paketini yayınlayın ve canlı testleri tamamlayın.
+9. Şirket kabulünü, eğitimi ve teknik devri kayda alın.
+
+Başlama kapısı:
+
+Şirket unvanı, hesap yetkilisi, şirket IBAN'ı, kurumsal iletişim kanalları ve
+gerekli mali teyitler netleşmeden Shopier hesabı gerçek satış için açılmamalıdır.
+Nihai marka, gerçek ürünler, doğru Shopier bağlantıları ve Natro erişimi
+tamamlanmadan geçici içerik canlıya çıkarılmamalıdır.
+
+Formu son güncelleyen:
+..............................................................................
+
+Son güncelleme tarihi:
+..............................................................................
+
+Şirket onay durumu:
+[ ] Onaylandı    [ ] Revizyon istendi    [ ] Bilgi bekleniyor

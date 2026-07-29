@@ -1,7 +1,7 @@
 # Şirketler İçin Shopier Hesabı Açılışı, Ürün Listeleme ve Operasyon Rehberi
 
-**Belge sürümü:** 1.0  
-**Son doğrulama tarihi:** 29 Temmuz 2026  
+**Belge sürümü:** 1.1
+**Son doğrulama tarihi:** 30 Temmuz 2026
 **Kapsam:** Türkiye’de yerleşik bir şirketin fiziksel koleksiyon kartlarını Shopier üzerinden satışa sunması  
 **Proje bağlamı:** Statik tanıtım sitesi ürünleri gösterir; sepet, ödeme, sipariş ve müşteri verileri Shopier’de yönetilir.
 
@@ -21,7 +21,7 @@ Bu projede tanıtım sitesi ödeme almaz, sipariş oluşturmaz ve müşteri veri
 
 ## 2. Son doğrulama tarihi ve değişiklik yönetimi
 
-Bu belgedeki platform bilgileri 29 Temmuz 2026 tarihinde resmî Shopier yardım merkezi ve resmî kamu kaynakları üzerinden doğrulanmıştır.
+Bu belgedeki platform bilgileri 30 Temmuz 2026 tarihinde resmî Shopier kayıt ekranı, resmî Shopier yardım merkezi ve resmî kamu kaynakları üzerinden yeniden doğrulanmıştır.
 
 Canlıya çıkıştan hemen önce şu değişken bilgiler yeniden kontrol edilmelidir:
 
@@ -152,7 +152,7 @@ Shopier’in kamuya açık yardım makaleleri ticari hesap için her durumda ist
 - [ ] Kondisyon standardı ve onaylayacak kişi
 - [ ] Satış fiyatı hesap yöntemi
 
-### Panel açıldığında ayrıca kontrol edilecekler
+**Panel açıldığında ayrıca kontrol edilecekler**
 
 - [ ] Shopier’in istediği güncel bilgi ve belgeler
 - [ ] Üyelik sözleşmeleri ve aydınlatma metinleri
@@ -160,10 +160,23 @@ Shopier’in kamuya açık yardım makaleleri ticari hesap için her durumda ist
 - [ ] Güncel anlaşmalı kargo şartları
 - [ ] Hesap aktivasyon durumu
 
+### İlk kayıt ekranında görülen temel alanlar
+
+30 Temmuz 2026 tarihli resmî Shopier kayıt ekranında ilk hesap oluşturma adımında şu alanlar bulunur: [31]
+
+- Dükkan adı ve bu ada bağlı mağaza bağlantısı
+- E-posta adresi
+- Ülke/telefon kodu ve cep telefonu
+- Şifre ve şifre tekrarı
+- Üyelik Sözleşmesi onayı
+- Aydınlatma Metni’nin okunduğuna ilişkin beyan
+
+Bu ilk ekran, ticari hesabın bütün şirket/doğrulama bilgilerinin tamamlandığı anlamına gelmez. İlk kayıt sonrasında hesap yönetimindeki ticari üyelik, şirket, yetkili, banka ve panelin güncel olarak istediği doğrulama alanları ayrıca tamamlanmalıdır.
+
 ## 7. Ticari hesap açılışı: adım adım
 
 1. **Sahipliği kesinleştirin.** Hesabı hangi şirketin, hangi yetkili kişiyle ve hangi kurumsal e-postayla açacağını yazılı karara bağlayın.
-2. **Kayıt sayfasını açın.** Shopier ana sayfasındaki “Ücretsiz Üye Ol” akışını kullanın. Üyelik oluşturmak ücretsizdir. [5]
+2. **Kayıt sayfasını açın.** Shopier ana sayfasındaki “Ücretsiz Üye Ol” akışını veya doğrudan resmî kayıt ekranını kullanın. Üyelik oluşturmak ücretsizdir. Kayıt ekranındaki dükkan adı/linki, e-posta, telefon ve şifre alanlarını kalıcı şirket bilgileriyle doldurun. [5], [31]
 3. **Kalıcı iletişim bilgilerini girin.** Çalışanın kişisel/geçici e-postası yerine şirketin kontrol ettiği adresi ve telefonu kullanın.
 4. **Üyelik tipini ticari seçin.** Şirket türünü resmî kayıtla aynı belirleyin.
 5. **Şirket bilgilerini eksiksiz girin.** Ticari unvanı kısaltmadan, vergi ve adres bilgilerini resmî belgelerle karşılaştırarak yazın.
@@ -499,7 +512,7 @@ Tekil koleksiyon kartlarında varyasyon kullanımı istisna olmalıdır. Kondisy
 | Tam bağlantı     | `https://www.shopier.com/...` |
 | Statik site slug | `charizard-ex-223-197`        |
 | Durum            | Aktif / Satıldı / Gizli       |
-| Son doğrulama    | 29.07.2026                    |
+| Son doğrulama    | 30.07.2026                    |
 | Kontrol eden     | Yetkili adı/rolü              |
 
 ### Bağlantı güvenliği
@@ -525,7 +538,7 @@ Bu projede statik site ürün kaydı ve Shopier ürün kaydı elle eşleştirili
 7. `availability: available`, `isPlaceholder: false` yapılır.
 8. İçerik doğrulaması ve build çalıştırılır.
 9. Ürün detayındaki CTA’nın doğru Shopier sayfasını yeni sekmede açtığı kontrol edilir.
-10. Yayın paketi Natro’ya ancak WP-09 açıldığında aktarılır.
+10. Yayın paketi Natro’ya yalnız alan adı, hosting ve canlıya çıkış onayı tamamlandıktan sonra aktarılır.
 
 ### Doğruluk kaynağı
 
@@ -561,13 +574,13 @@ Statik sitede satılan kartlar güven ve arşiv değeri için “Satıldı” et
 
 Shopier, kendi seçilen kargo firmasıyla manuel gönderim ve şartları sağlayan siparişlerde anlaşmalı kargo kodu kullanımını destekler. Manuel kargoda ödemenin aktarılabilmesi için takip bilgileri girilerek sipariş kapatılır; anlaşmalı kargoda gönderi şubede işlendiğinde sipariş otomatik kapanabilir. [16], [17]
 
-29 Temmuz 2026 itibarıyla Shopier’in anlaşmalı kargo yardım sayfası şu genel şartları belirtir:
+30 Temmuz 2026 itibarıyla Shopier’in anlaşmalı kargo yardım sayfası şu genel şartları belirtir:
 
 - Sipariş toplamı en az 200 TL
 - Tüm ürünlerin kargo tipi “Sepette ödeme” veya “Ücretsiz kargo”
 - Alıcı adresi Türkiye sınırları içinde
 
-Bu şartlar ve kargo firmaları değişebileceği için paneldeki güncel seçenekler canlıya çıkışta yeniden doğrulanmalıdır. [17]
+Shopier’in resmî ana sayfası aynı tarihte Yurtiçi Kargo, DHL eCommerce ve PTT Kargo adlarını gösterir. Buna rağmen anlaşmalı firmalar, kapsam ve ücretler değişebileceği için canlıya çıkışta Shopier panelindeki güncel seçenekler esas alınmalıdır. [17], [32]
 
 ### Önerilen başlangıç akışı
 
@@ -621,7 +634,9 @@ Yüksek değerli ürünlerde paketleme öncesi ve kapalı paket fotoğrafı uyu�
 
 ## 24. Sipariş yönetimi
 
-Shopier’de sipariş durumları “Açık”, “Kapalı”, “İptal” ve “İade” olarak açıklanır. Açık durum ödeme tamamlanmış ve teslimat bekleyen; kapalı durum fiziksel ürünün kargoya teslim edildiğini; iptal, ödeme aktarılmadan tutarın müşteriye döndüğünü; iade ise aktarım sonrası tam veya bağımsız kısmi iade yapıldığını gösterir. [19]
+Shopier satıcı panelinde sipariş durumları “Açık”, “Kapalı”, “İptal” ve “İade” olarak açıklanır. Açık durum ödeme tamamlanmış ve teslimat bekleyen; kapalı durum fiziksel ürünün kargoya teslim edildiğini; iptal, ödeme aktarılmadan tutarın müşteriye döndüğünü; iade ise aktarım sonrası tam veya bağımsız kısmi iade yapıldığını gösterir. [19]
+
+Müşterinin sipariş takip ekranında ise daha açıklayıcı “Sipariş alındı”, “Kargoya verildi”, “Teslim edildi”, “İptal edildi” ve “İade edildi” ifadeleri görülebilir. Satıcı paneli ile müşteri ekranındaki bu iki adlandırma seti birbirine karıştırılmamalıdır. [20]
 
 ### Yeni sipariş SOP
 
@@ -725,7 +740,7 @@ GİB, elektronik belge uygulamasındaki mükelleflerin faaliyetlerine uygun e-Be
 
 ### Muhasebe dosyası
 
-Her dönem için:
+Her dönem için aşağıdaki kayıtlar saklanmalı ve mali müşavirle mutabakat yapılmalıdır:
 
 - Shopier sipariş listesi
 - Tahsilat detayları
@@ -735,8 +750,6 @@ Her dönem için:
 - Shopier hizmet bedeli belgeleri
 - Kargo kesintileri/belgeleri
 - Stok giriş ve çıkış kayıtları
-
-saklanmalı ve mali müşavirle mutabakat yapılmalıdır.
 
 ## 29. ETBİS değerlendirmesi
 
@@ -940,11 +953,11 @@ Canlıya çıkıştan önce aşağıdaki tablo şirket bilgileri geldiğinde dol
 | İlk ürünlerin kondisyonu    | Onay bekliyor | Ürün sahibi         | —             |
 | Shopier işlem bedeli        | Panel teyidi  | Şirket              | —             |
 
-Bu kararlar gelmeden WP-01, WP-02, WP-03, WP-09 ve WP-10 başlatılmamalıdır.
+Bu kararlar netleşmeden hesap açılışı, Shopier mağaza yapılandırması, marka onayı, Natro canlıya çıkışı ve gerçek ürün eşleştirmeleri başlatılmamalıdır.
 
 ## 38. Kaynakça
 
-Son erişim ve doğrulama tarihi: **29 Temmuz 2026**.
+Son erişim ve doğrulama tarihi: **30 Temmuz 2026**.
 
 1. [Shopier nedir? — Shopier Yardım Merkezi](https://help.shopier.com/help/shopier-nedir)
 2. [Shopier nasıl kullanılır? — Shopier Yardım Merkezi](https://help.shopier.com/help/shopier-nasil-kullanilir)
@@ -976,3 +989,5 @@ Son erişim ve doğrulama tarihi: **29 Temmuz 2026**.
 28. [Did I purchase fake or counterfeit cards? — Pokémon Support](https://support.pokemon.com/hc/en-us/articles/360002068953-Did-I-purchase-fake-or-counterfeit-cards)
 29. [Pokémon isim ve görsellerinin proje kullanımı hakkında resmî destek açıklaması](https://support.pokemon.com/hc/es/articles/360000634094--Puedo-utilizar-los-nombres-e-im%C3%A1genes-de-Pok%C3%A9mon-en-mi-proyecto)
 30. [Çerez Uygulamaları Hakkında Rehber — Kişisel Verileri Koruma Kurumu](https://www.kvkk.gov.tr/Icerik/7353/Cerez-Uygulamalari-Hakkinda-Rehber)
+31. [Shopier Ücretsiz Hesap Oluşturma Ekranı](https://www.shopier.com/m/signup.php?locale=tr)
+32. [Shopier Resmî Ana Sayfası — Anlaşmalı Kargo Bilgisi](https://www.shopier.com/)
