@@ -1,8 +1,10 @@
 # Pokémon Web — statik koleksiyon kartı vitrini
 
+[![CI](https://github.com/abdulazizoner/pokemon-web/actions/workflows/ci.yml/badge.svg)](https://github.com/abdulazizoner/pokemon-web/actions/workflows/ci.yml)
+
 Natro paylaşımlı hosting için statik olarak derlenen, ürünleri tanıtan ve satışa açık gerçek kayıtları Shopier ürün sayfalarına yönlendiren Astro sitesi.
 
-> `Paralel Arşiv` markası, iletişim bilgileri, kart kayıtları ve kart görselleri temsili ön izleme içeriğidir. WP-01, WP-02, WP-03, WP-09 ve WP-10 şirket bilgileri gelene kadar askıdadır.
+> `Paralel Arşiv` markası, iletişim bilgileri, kart kayıtları ve kart görselleri temsili ön izleme içeriğidir. Şirket, Shopier, marka, gerçek ürün ve Natro bilgilerine bağlı çalışmalar gerekli onaylar gelene kadar askıdadır.
 
 ## Kapsam
 
@@ -97,8 +99,14 @@ Natro’ya yüklenecek dosyalar `dist/` içindedir. Natro dağıtımı WP-09 aç
 - `docs/NATRO-DEPLOYMENT-DRAFT.md`: askıdaki canlı dağıtım hazırlığı
 - `docs/FINAL-LOCAL-AUDIT.md`: son yerel ürün denetimi ve doğrulama özeti
 - `docs/shopier-sirket-hesabi-ve-operasyon-rehberi.md`: Shopier ana rehberi
-- `deliverables/`: Word rehberi ve askıdaki paketler raporu
+- `required_fields/`: nihai Shopier rehberi, gerekli bilgi formu ve sayfa görüntüleri
+- `deliverables/`: önceki teslim adlarının korunduğu tarihsel çıktı alanı
+- `.github/workflows/ci.yml`: GitHub üzerinde lint, test ve statik build doğrulaması
 
 ## Work package durumu
 
 WP-04, WP-05, WP-06, WP-07 ve WP-08 yerel olarak tamamlanmış ve son regresyonda doğrulanmıştır. Şirket/hesap/gerçek içerik bağımlı WP-01, WP-02, WP-03, WP-09 ve WP-10 askıdadır. Bu nedenle proje canlıda veya nihai kabul edilmiş sayılmaz; mevcut durum yerel kabul testine hazır statik frontend’dir. Ayrıntılar `docs/WORK-PACKAGES.md` ve `deliverables/ASKIYA_ALINAN_WORK_PACKAGES.txt` içindedir.
+
+## Lisans
+
+Bu depoya henüz bir açık kaynak lisansı atanmadı. Deponun herkese açık olması, kaynak kodun veya görsel/içerik varlıklarının yeniden kullanımına otomatik olarak izin verildiği anlamına gelmez.

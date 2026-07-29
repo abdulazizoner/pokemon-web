@@ -1,7 +1,16 @@
 {
   "name": "pokemon-web",
+  "description": "Astro ve TypeScript ile geliştirilen, Shopier ürün bağlantılarına yönlendiren statik Pokémon kart vitrini.",
   "private": true,
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdulazizoner/pokemon-web.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abdulazizoner/pokemon-web/issues"
+  },
+  "homepage": "https://github.com/abdulazizoner/pokemon-web#readme",
   "engines": {
     "node": ">=22.12.0"
   },
