@@ -2,9 +2,23 @@ import fs from "node:fs";
 import path from "node:path";
 import { readProducts } from "./lib/content-validator.mjs";
 
-const slug = process.argv[2];
+const args = process.argv.slice(2);
+
+function getOption(name) {
+  const inline = args.find((arg) => arg.startsWith(`${name}=`));
+  if (inline) return inline.slice(name.length + 1);
+  const index = args.indexOf(name);
+  return index >= 0 ? args[index + 1] : undefined;
+}
+
+const positionalSlug = args[0] && !args[0].startsWith("-") ? args[0] : undefined;
+const slug = getOption("--slug") ?? positionalSlug;
+const productName = getOption("--name")?.trim() || "YENİ KART ADI";
+
 if (!slug || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
-  console.error("Kullanım: pnpm card:new kart-slug (yalnız küçük harf, sayı ve tire)");
+  console.error(
+    'Kullanım: pnpm card:new --slug kart-slug --name "Kart adı" (slug yalnız küçük harf, sayı ve tire)',
+  );
   process.exit(1);
 }
 
@@ -24,7 +38,7 @@ const today = new Date().toISOString().slice(0, 10);
 const template = `---
 productId: "${nextId}"
 slug: "${slug}"
-name: "YENİ KART ADI"
+name: ${JSON.stringify(productName)}
 setName: "SET ADI"
 setCode: ""
 collectorNumber: "000/000"

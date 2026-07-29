@@ -14,6 +14,15 @@ export const CONDITION_VALUES = new Set([
   "Played",
   "Damaged",
 ]);
+export const LANGUAGE_VALUES = new Set([
+  "Türkçe",
+  "İngilizce",
+  "Japonca",
+  "Almanca",
+  "Fransızca",
+  "Diğer",
+]);
+export const FINISH_VALUES = new Set(["Normal", "Holo", "Reverse Holo", "Cosmos Holo", "Diğer"]);
 export const MAX_PUBLIC_IMAGE_BYTES = 8 * 1024 * 1024;
 
 export function listContentFiles() {
@@ -42,7 +51,13 @@ export function isApprovedShopierUrl(value) {
   if (!value) return false;
   try {
     const url = new URL(value);
-    return url.protocol === "https:" && APPROVED_SHOPIER_HOSTS.has(url.hostname.toLowerCase());
+    return (
+      url.protocol === "https:" &&
+      APPROVED_SHOPIER_HOSTS.has(url.hostname.toLowerCase()) &&
+      !url.username &&
+      !url.password &&
+      !url.port
+    );
   } catch {
     return false;
   }
@@ -64,7 +79,11 @@ function checkImage(errors, fileName, field, value) {
     errors.push(`${fileName}: "${field}" desteklenmeyen görsel uzantısına sahip (${extension}).`);
     return;
   }
-  const diskPath = path.join(PUBLIC_DIR, value.replace(/^[/\\]+/, ""));
+  const diskPath = path.resolve(PUBLIC_DIR, value.replace(/^[/\\]+/, ""));
+  if (!diskPath.startsWith(`${PUBLIC_DIR}${path.sep}`)) {
+    errors.push(`${fileName}: "${field}" public/ klasörü dışına çıkamaz.`);
+    return;
+  }
   if (!fs.existsSync(diskPath)) {
     errors.push(`${fileName}: "${field}" dosyası bulunamadı: ${value}`);
     return;
@@ -110,6 +129,33 @@ export function validateProducts(products = readProducts()) {
     if (!CONDITION_VALUES.has(data.condition)) {
       errors.push(`${fileName}: geçersiz condition değeri "${data.condition}".`);
     }
+    if (!LANGUAGE_VALUES.has(data.language)) {
+      errors.push(`${fileName}: geçersiz language değeri "${data.language}".`);
+    }
+    if (!FINISH_VALUES.has(data.finish)) {
+      errors.push(`${fileName}: geçersiz finish değeri "${data.finish}".`);
+    }
+    if (typeof data.featured !== "boolean") {
+      errors.push(`${fileName}: featured true veya false olmalıdır.`);
+    }
+    if (typeof data.isPlaceholder !== "boolean") {
+      errors.push(`${fileName}: isPlaceholder true veya false olmalıdır.`);
+    }
+    if (
+      data.displayPrice !== undefined &&
+      (typeof data.displayPrice !== "string" || data.displayPrice.trim().length < 2)
+    ) {
+      errors.push(`${fileName}: displayPrice boş olmayan okunabilir bir metin olmalıdır.`);
+    }
+    if (data.seoTitle && (typeof data.seoTitle !== "string" || data.seoTitle.length > 65)) {
+      errors.push(`${fileName}: seoTitle en fazla 65 karakter olmalıdır.`);
+    }
+    if (
+      data.seoDescription &&
+      (typeof data.seoDescription !== "string" || data.seoDescription.length > 170)
+    ) {
+      errors.push(`${fileName}: seoDescription en fazla 170 karakter olmalıdır.`);
+    }
     if (!data.publishedAt || Number.isNaN(new Date(data.publishedAt).getTime())) {
       errors.push(`${fileName}: publishedAt geçerli bir tarih olmalıdır.`);
     }
@@ -119,7 +165,13 @@ export function validateProducts(products = readProducts()) {
 
     checkImage(errors, fileName, "frontImage", data.frontImage);
     checkImage(errors, fileName, "backImage", data.backImage);
-    for (const [index, detail] of (data.detailImages || []).entries()) {
+    if (!Array.isArray(data.detailImages)) {
+      errors.push(`${fileName}: detailImages bir liste olmalıdır.`);
+    }
+    for (const [index, detail] of (Array.isArray(data.detailImages)
+      ? data.detailImages
+      : []
+    ).entries()) {
       if (!detail || typeof detail.alt !== "string" || detail.alt.trim().length < 6) {
         errors.push(`${fileName}: detailImages[${index}] için açıklayıcı alt metin zorunludur.`);
       }
@@ -142,10 +194,17 @@ export function validateProducts(products = readProducts()) {
       if (!isApprovedShopierUrl(data.shopierUrl)) {
         errors.push(`${fileName}: Shopier URL'si HTTPS ve onaylı alan adında olmalıdır.`);
       }
-      if (seenUrls.has(data.shopierUrl)) {
-        errors.push(`${fileName}: yinelenen Shopier URL'si (${seenUrls.get(data.shopierUrl)}).`);
+      const canonicalUrl = (() => {
+        try {
+          return new URL(data.shopierUrl).href;
+        } catch {
+          return data.shopierUrl;
+        }
+      })();
+      if (seenUrls.has(canonicalUrl)) {
+        errors.push(`${fileName}: yinelenen Shopier URL'si (${seenUrls.get(canonicalUrl)}).`);
       } else {
-        seenUrls.set(data.shopierUrl, fileName);
+        seenUrls.set(canonicalUrl, fileName);
       }
     }
 

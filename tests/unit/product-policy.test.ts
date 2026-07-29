@@ -21,6 +21,8 @@ describe("store and product policy", () => {
     expect(isApprovedShopierUrl("https://shopier.com/example")).toBe(true);
     expect(isApprovedShopierUrl("http://www.shopier.com/example")).toBe(false);
     expect(isApprovedShopierUrl("https://shopier.com.evil.example/example")).toBe(false);
+    expect(isApprovedShopierUrl("https://user@www.shopier.com/example")).toBe(false);
+    expect(isApprovedShopierUrl("https://www.shopier.com:8443/example")).toBe(false);
   });
 
   it("never enables purchase for placeholder, sold or invalid products", () => {

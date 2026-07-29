@@ -39,4 +39,21 @@ describe("content validator", () => {
     ]);
     expect(result.errors.join("\n")).toMatch(/yer tutucu ürün/);
   });
+
+  it("rejects insecure and lookalike Shopier hosts", () => {
+    const base = readProducts()[0];
+    const result = validateProducts([
+      {
+        ...base,
+        data: {
+          ...base.data,
+          availability: "available",
+          isPlaceholder: false,
+          displayPrice: "1.000 TL",
+          shopierUrl: "https://www.shopier.com.evil.example/product",
+        },
+      },
+    ]);
+    expect(result.errors.join("\n")).toMatch(/onaylı alan adında/);
+  });
 });

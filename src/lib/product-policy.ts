@@ -37,7 +37,13 @@ export function isApprovedShopierUrl(value?: string): boolean {
   if (!value) return false;
   try {
     const url = new URL(value);
-    return url.protocol === "https:" && approvedShopierHosts.has(url.hostname.toLowerCase());
+    return (
+      url.protocol === "https:" &&
+      approvedShopierHosts.has(url.hostname.toLowerCase()) &&
+      !url.username &&
+      !url.password &&
+      !url.port
+    );
   } catch {
     return false;
   }

@@ -1,11 +1,15 @@
 {
-  "name": "card-showcase",
+  "name": "pokemon-web",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
-    "build": "pnpm content:validate && astro check && astro build && pnpm links:check",
+    "build": "pnpm content:validate && astro check && astro build && pnpm assets:check && pnpm links:check",
     "preview": "astro preview",
+    "local:test": "astro preview --host 127.0.0.1 --port 4321",
     "check": "astro check",
     "lint": "eslint .",
     "format": "prettier --check .",
@@ -18,23 +22,24 @@
     "content:validate": "node scripts/validate-content.mjs",
     "media:optimize": "node scripts/optimize-media.mjs",
     "media:check": "node scripts/optimize-media.mjs --check",
+    "assets:check": "node scripts/check-static-assets.mjs",
     "links:check": "node scripts/check-links.mjs",
     "shopier:check": "node scripts/check-shopier-links.mjs",
     "visual:capture": "playwright test --config=playwright.visual.config.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
-    "astro": "^5.13.0",
+    "astro": "7.1.5",
     "gray-matter": "^4.0.3",
-    "sharp": "^0.34.0"
+    "sharp": "^0.35.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@axe-core/playwright": "^4.10.2",
-    "@eslint/js": "^9.34.0",
+    "@eslint/js": "10.0.1",
     "@playwright/test": "^1.55.0",
     "@types/node": "^24.3.0",
-    "eslint": "^9.34.0",
+    "eslint": "10.8.0",
     "eslint-plugin-astro": "^1.3.1",
     "globals": "^16.3.0",
     "prettier": "^3.6.2",
